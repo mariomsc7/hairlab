@@ -33,4 +33,6 @@ Route::prefix('admin')
 
         // ROUTE HOME ADMIN
         Route::get('/', 'HomeController@index')->name('home');
+
+        Route::resource('/services', 'ServiceController');
     });

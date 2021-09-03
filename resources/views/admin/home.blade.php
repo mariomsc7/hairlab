@@ -18,6 +18,8 @@
                 </div>
             </div>
             <a class="btn btn-primary mt-3" href="{{ route('admin.services.index') }}">Mostra servizi</a>
+            <a class="btn btn-success mt-3" href="{{ route('admin.employees.index') }}">Mostra dipendenti</a>
+            <a class="btn btn-warning mt-3" href="{{ route('admin.clients.index') }}">Mostra clienti</a>
         </div>
     </div>
 </div>

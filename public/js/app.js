@@ -49870,6 +49870,17 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
+}); // Delete confirmation message
+
+var deleteConfirm = document.querySelectorAll(".delete-form");
+deleteConfirm.forEach(function (form) {
+  form.addEventListener("submit", function (e) {
+    var resp = confirm("Sei sicuro di voler cancellare?");
+
+    if (!resp) {
+      e.preventDefault();
+    }
+  });
 });
 
 /***/ }),

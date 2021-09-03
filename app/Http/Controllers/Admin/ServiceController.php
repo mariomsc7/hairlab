@@ -39,7 +39,7 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    
         {
             $request->validate(
                 [
@@ -61,7 +61,7 @@ class ServiceController extends Controller
     
             return redirect()->route('admin.services.index');
         }
-    }
+    
 
     /**
      * Display the specified resource.

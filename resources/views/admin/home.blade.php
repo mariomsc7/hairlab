@@ -17,7 +17,7 @@
                     {{ __('You are logged in!') }}
                 </div>
             </div>
-            <a class="btn btn-primary" href="{{ route('admin.services.index') }}">Mostra servizi</a>
+            <a class="btn btn-primary mt-3" href="{{ route('admin.services.index') }}">Mostra servizi</a>
         </div>
     </div>
 </div>

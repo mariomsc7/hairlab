@@ -2,12 +2,21 @@
 
 @section('content')
     <div class="container">
-            <table class="table mt-3 tt">
+        @if(session('deleted'))
+        <div class="alert alert-success">
+            Servizio
+            <strong>{{ session('deleted') }} </strong>
+            cancellato.
+        </div>
+        @endif
+        <a class="btn btn-primary text-uppercase" href="{{route('admin.home')}}">Ritorna alla home</a>
+        <a class="btn btn-success text-uppercase" href="{{route('admin.services.create')}}">Aggiungi Servizio</a>
+            <table class="table mt-3">
                 <thead>
                     <tr>
                         <th>Nome Servizio</th>
                         <th>Prezzo</th>
-                        <th colspan="2">Azioni</th>
+                        <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -16,19 +25,20 @@
                             <td>{{$service->name}}</td>
                             <td>€{{number_format($service->price, 2)}}</td>
                             <td>
-                                <a class="btn show-info" href="#">Mostra Dettagli</a>
-                            </td>
-                            {{-- <td>
-                                <form class="delete-form" action="{{route('admin.orders.destroy', $service->id)}}" method="POST">
+                                <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica</a>
+                                <form class="delete-form d-inline-block" action="{{route('admin.services.destroy', $service->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" class="btn delete" value="CANCELLA ORDINE">
+                                    <input type="submit" class="btn btn-danger" value="Elimina">
                                 </form>
+                            </td>
+                            {{-- <td>
+
                             </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
             </table>
     </div>
-    
+
 @endsection

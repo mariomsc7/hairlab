@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Client;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -14,7 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        
+        return view('admin.clients.index', compact('clients'));
     }
 
     /**
@@ -24,7 +28,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.clients.create');
     }
 
     /**
@@ -35,7 +39,29 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|max:30',
+                'last_name' => 'required|max:30',
+                'phone_number' => 'required|unique:clients|size:10',
+                'email' => 'required|max:30',
+            ],
+            [
+                'required' => 'Il :attribute è richiesto!',
+                'max' => 'Massimo :max numeri per :attribute',
+                'unique' => ':attribute è già in uso',
+                'size' => 'Inserisci :size numeri'
+            ]
+        );
+
+        $data = $request->all();
+
+        $new_client = new Client();
+
+        $new_client->fill($data);
+        $new_client->save();
+
+        return redirect()->route('admin.clients.index');
     }
 
     /**
@@ -57,7 +83,11 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        if (!$client) {
+            abort(404);
+        }
+        return view('admin.clients.edit', compact('client'));
     }
 
     /**
@@ -69,7 +99,29 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|max:30',
+                'last_name' => 'required|max:30',
+                'phone_number' => ["required", Rule::unique('clients')->ignore($id), 'size:10'],
+                'email' => 'required|max:30',
+            ],
+            [
+                'required' => 'Il :attribute è richiesto!',
+                'max' => 'Massimo :max numeri per :attribute',
+                'unique' => ':attribute è già in uso',
+                'size' => 'Inserisci :size numeri'
+            ]
+        );
+
+        $data = $request->all();
+
+        $client = Client::find($id);
+
+        $client->update($data);
+       
+
+        return redirect()->route('admin.clients.index');
     }
 
     /**
@@ -80,6 +132,9 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+        
+        $client->delete();
+        return redirect()->route('admin.clients.index')->with('deleted', $client->name.' '.$client->last_name);
     }
 }

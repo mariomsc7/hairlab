@@ -30,3 +30,14 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+// Delete confirmation message
+const deleteConfirm = document.querySelectorAll(".delete-form");
+deleteConfirm.forEach(form => {
+    form.addEventListener("submit", function(e) {
+        const resp = confirm("Sei sicuro di voler cancellare?");
+        if (!resp) {
+            e.preventDefault();
+        }
+    });
+});

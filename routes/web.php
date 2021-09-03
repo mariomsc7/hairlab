@@ -33,6 +33,10 @@ Route::prefix('admin')
 
         // ROUTE HOME ADMIN
         Route::get('/', 'HomeController@index')->name('home');
-
+        // ROUTE SERVIZI
         Route::resource('/services', 'ServiceController');
+        // ROUTE DIPENDENTI
+        Route::resource('/employees', 'EmployeeController');
+        // ROUTE DIPENDENTI
+        Route::resource('/clients', 'ClientController');
     });

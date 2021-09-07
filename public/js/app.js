@@ -49882,6 +49882,31 @@ deleteConfirm.forEach(function (form) {
     }
   });
 });
+document.addEventListener('DOMContentLoaded', function () {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'timeGridWeek',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,listWeek,dayGridDay'
+    },
+    nowIndicator: true,
+    //   businessHours: {
+    //     // days of week. an array of zero-based day of week integers (0=Sunday)
+    //     daysOfWeek: [ 2, 3, 4, 5, 6 ], // 
+    //     // startTime: '8:00', // a start time (10am in this example)
+    //     // endTime: '20:00', // an end time (6pm in this example)
+    //   },
+    slotMinTime: '8:00:00',
+    slotMaxTime: '21:00:00',
+    locale: 'it',
+    dateClick: function dateClick() {
+      alert('a day has been clicked!');
+    }
+  });
+  calendar.render();
+});
 
 /***/ }),
 

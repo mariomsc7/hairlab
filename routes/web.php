@@ -37,6 +37,8 @@ Route::prefix('admin')
         Route::resource('/services', 'ServiceController');
         // ROUTE DIPENDENTI
         Route::resource('/employees', 'EmployeeController');
-        // ROUTE DIPENDENTI
+        // ROUTE CLIENTI
         Route::resource('/clients', 'ClientController');
+        // ROUTE Appuntamenti
+        Route::resource('/appointments', 'AppointmentController');
     });

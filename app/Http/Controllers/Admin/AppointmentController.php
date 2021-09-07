@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Appointment;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -14,7 +15,9 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $appointments = Appointment::all();
+        
+        return view('admin.appointments.index', compact('appointments'));
     }
 
     /**

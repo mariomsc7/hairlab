@@ -9,7 +9,7 @@
             cancellato.
         </div>
         @endif
-        <a class="btn btn-primary text-uppercase mb-2" href="{{route('admin.home')}}">Ritorna alla home</a>
+        <a class="btn btn-primary text-uppercase" href="{{route('admin.home')}}">Ritorna alla home</a>
         <a class="btn btn-success text-uppercase" href="{{route('admin.services.create')}}">Aggiungi Servizio</a>
             <table class="table mt-3">
                 <thead>
@@ -25,7 +25,7 @@
                             <td>{{$service->name}}</td>
                             <td>€{{number_format($service->price, 2)}}</td>
                             <td>
-                                <a class="btn btn-warning mb-2" href="{{route('admin.services.edit', $service->id)}}">Modifica</a>
+                                <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica</a>
                                 <form class="delete-form d-inline-block" action="{{route('admin.services.destroy', $service->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')

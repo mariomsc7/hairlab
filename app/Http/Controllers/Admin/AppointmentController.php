@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Appointment;
 use App\Service;
 use App\Employee;
+use App\Client;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -29,9 +30,10 @@ class AppointmentController extends Controller
      */
     public function create()
     {
+        $clients = Client::all();
         $employees = Employee::all();
         $services = Service::all();
-        return view('admin.appointments.create', compact('services', 'employees'));
+        return view('admin.appointments.create', compact('services', 'employees', 'clients'));
     }
 
     /**

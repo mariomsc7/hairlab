@@ -24,9 +24,21 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="client_id">Cliente registrato*</label>
+                    <select class="form-control @error('client_id') is-invalid @enderror" name="client_id" id="client_id">
+                        <option value="">-- Seleziona cliente --</option>
+                        @foreach ($clients as $client)
+                            <option value="{{$client->id}}" @if($client->id == old('client_id')) selected @endif>{{$client->name}} {{$client->last_name}}</option>
+                        @endforeach
+                    </select>
+                    @error('client_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="employee_id">Dipendente*</label>
                     <select class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" id="employee_id">
-                        <option value="">-- Select employee --</option>
+                        <option value="">-- Seleziona dipendente --</option>
                         @foreach ($employees as $employee)
                             <option value="{{$employee->id}}" @if($employee->id == old('employee_id')) selected @endif>{{$employee->name}} {{$employee->last_name}}</option>
                         @endforeach

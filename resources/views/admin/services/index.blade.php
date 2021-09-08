@@ -11,6 +11,7 @@
         @endif
         <a class="btn btn-primary text-uppercase" href="{{route('admin.home')}}">Ritorna alla home</a>
         <a class="btn btn-success text-uppercase" href="{{route('admin.services.create')}}">Aggiungi Servizio</a>
+        <h1 class="mb-5 mt-5">Servizi:</h1>
             <table class="table mt-3">
                 <thead>
                     <tr>

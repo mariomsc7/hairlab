@@ -10,12 +10,12 @@
         </div>
         @endif
         <a class="btn btn-primary text-uppercase" href="{{route('admin.home')}}">Ritorna alla home</a>
-        <a class="btn btn-success text-uppercase" href="{{route('admin.clients.create')}}">Aggiungi Appuntamento</a>
+        <a class="btn btn-success text-uppercase" href="{{route('admin.appointments.create')}}">Aggiungi Appuntamento</a>
             <h1 class="mb-5 mt-5">Appuntamenti:</h1>
             @foreach($appointments as $appointment)
                 <hr>
                 <h3>Nome cliente: {{$appointment->client->name}} {{$appointment->client->last_name}}</h3>
-                <h3>Da: {{$appointment->start_time->format('l d/m/y')}} A: {{$appointment->end_time}}</h3>
+                <h3>Da: {{$appointment->created_at->format('l d/m/y')}} A: {{$appointment->end_time}}</h3>
                 <h3>Dipendente: {{$appointment->employee->name}}</h3>
                 <hr>
             @endforeach

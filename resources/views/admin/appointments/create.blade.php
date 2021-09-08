@@ -5,8 +5,8 @@
     <div class="container">
             
             <h1>Registra Appuntamento: </h1>
-            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.employees.index')}}">Torna a appuntamenti</a>
-            <form method="POST" action="{{route('admin.employees.store')}}" enctype="multipart/form-data">
+            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Torna a appuntamenti</a>
+            <form method="POST" action="{{route('admin.appointments.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="mb-3">
@@ -23,12 +23,37 @@
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-            
                 <div class="mb-3">
-                    <label for="phone_number" class="control-label">Numero di telefono*</label>
-                    <input id="phone_number" name="phone_number" type="number" class="form-control @error('phone_number') is-invalid @enderror" value="{{old('phone_number')}}" minlength="10" maxlength="10" required>
-                    @error('phone_number')
-                        <div class="invalid-feedback">{{$message}}</div>
+                    <label for="employee_id">Dipendente*</label>
+                    <select class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" id="employee_id">
+                        <option value="">-- Select employee --</option>
+                        @foreach ($employees as $employee)
+                            <option value="{{$employee->id}}" @if($employee->id == old('employee_id')) selected @endif>{{$employee->name}} {{$employee->last_name}}</option>
+                        @endforeach
+                    </select>
+                    @error('employee_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <h4>Servizi*</h4>
+                    <ul>
+                        @foreach ($services as $service)
+                            <li class="list-unstyled">
+                                <input class="@error('services') is-invalid @enderror" type="checkbox"
+                                    name="services[]" id="service{{ $loop->iteration }}"
+                                    value="{{ $service->id}}"
+                                    @if(in_array($service->id, old('services', []))) checked @endif
+                                >
+                                <label for="service{{ $loop->iteration }}">
+                                    {{$service->name}} - 
+                                    €{{number_format($service->price, 2)}}
+                                </label>
+                            </li>
+                        @endforeach
+                    </ul>
+                    @error('services')
+                            <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <button type="submit" class="btn btn-success text-uppercase">Salva</button>

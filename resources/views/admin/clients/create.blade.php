@@ -24,8 +24,8 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="control-label">Email*</label>
-                    <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{old('email')}}" required maxlength="30">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{old('email')}}" maxlength="30">
                     @error('email')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror

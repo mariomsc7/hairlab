@@ -44,7 +44,7 @@ class ClientController extends Controller
                 'name' => 'required|max:30',
                 'last_name' => 'required|max:30',
                 'phone_number' => 'required|unique:clients|size:10',
-                'email' => 'required|max:30',
+                'email' => 'max:30',
             ],
             [
                 'required' => 'Il :attribute è richiesto!',
@@ -104,7 +104,7 @@ class ClientController extends Controller
                 'name' => 'required|max:30',
                 'last_name' => 'required|max:30',
                 'phone_number' => ["required", Rule::unique('clients')->ignore($id), 'size:10'],
-                'email' => 'required|max:30',
+                'email' => 'max:30',
             ],
             [
                 'required' => 'Il :attribute è richiesto!',

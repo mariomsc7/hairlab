@@ -16,7 +16,6 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->dateTime('start_time');
-            $table->dateTime('end_time');
             $table->string('comment')->nullable();
             $table->float('tot_paid', 5,2);
             $table->unsignedBigInteger('client_id');

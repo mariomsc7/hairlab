@@ -40,5 +40,6 @@ Route::prefix('admin')
         // ROUTE CLIENTI
         Route::resource('/clients', 'ClientController');
         // ROUTE Appuntamenti
-        Route::resource('/appointments', 'AppointmentController');
+        Route::resource('/appointments', 'AppointmentController', ['except' => ['create']]);
+        Route::get('/appointments/{client_id}/create', 'AppointmentController@create')->name('appointments.create');
     });

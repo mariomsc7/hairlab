@@ -28,12 +28,12 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $clients = Client::all();
+        $client = Client::find($id);
         $employees = Employee::all();
         $services = Service::all();
-        return view('admin.appointments.create', compact('services', 'employees', 'clients'));
+        return view('admin.appointments.create', compact('services', 'employees', 'client'));
     }
 
     /**
@@ -44,29 +44,28 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate(
-        //     [
-        //         'start_time' => 'required|max:30',
-        //         'end_time' => 'required|max:30',
-        //         'phone_number' => 'required|unique:clients|size:10',
-        //         'email' => 'required|max:30',
-        //     ],
-        //     [
-        //         'required' => 'Il :attribute è richiesto!',
-        //         'max' => 'Massimo :max numeri per :attribute',
-        //         'unique' => ':attribute è già in uso',
-        //         'size' => 'Inserisci :size numeri'
-        //     ]
-        // );
+        $request->validate(
+            [
+                'start_time' => 'required',
+            ],
+            [
+                'required' => 'Il :attribute è richiesto!',
+                'max' => 'Massimo :max numeri per :attribute',
+                'unique' => ':attribute è già in uso',
+                'size' => 'Inserisci :size numeri'
+            ]
+        );
 
-        // $data = $request->all();
+        $new_service = Service::select('id', 'price')->get();
+        dd($new_service);
+        $data = $request->all();
+        dd($data['services']);
+        $new_appointment = new Appointment();
 
-        // $new_client = new Client();
+        $new_appointment->fill($data);
+        $new_appointment->save();
 
-        // $new_client->fill($data);
-        // $new_client->save();
-
-        // return redirect()->route('admin.clients.index');
+        return redirect()->route('admin.appointments.index');
     }
 
     /**

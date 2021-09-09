@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Hair Lab
@@ -38,10 +38,17 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    @guest
+                    @else
+                    <ul class="navbar-nav m-auto">
+                        <li><a class="btn btn-light mr-1" href="{{ route('admin.home') }}">Home</a></li>
+                        <li><a class="btn btn-primary mr-1" href="{{ route('admin.services.index') }}">Mostra servizi</a></li>
+                        <li><a class="btn btn-success mr-1" href="{{ route('admin.employees.index') }}">Mostra dipendenti</a></li>
+                        <li><a class="btn btn-warning mr-1" href="{{ route('admin.clients.index') }}">Mostra clienti</a></li>
+                        <li><a class="btn btn-secondary mr-1" href="{{ route('admin.appointments.index') }}">Mostra appuntamenti</a></li>
+                        <li><a class="btn btn-danger mr-1" href="#">Cassa</a></li>
                     </ul>
-
+                    @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

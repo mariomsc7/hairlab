@@ -10,30 +10,23 @@
                 @csrf
                 @method('POST')
                 <div class="mb-3">
+                    <input type="number" name="client_id" value="{{$client->id}}" hidden>
                     <label for="name" class="control-label">Nome*</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name')}}" required maxlength="30">
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{$client->name}}" required maxlength="30" disabled>
                     @error('name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="last_name" class="control-label">Cognome*</label>
-                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{old('last_name')}}" required maxlength="30">
+                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{($client->last_name)}}" required maxlength="30" disabled>
                     @error('last_name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="client_id">Cliente registrato*</label>
-                    <select class="form-control @error('client_id') is-invalid @enderror" name="client_id" id="client_id">
-                        <option value="">-- Seleziona cliente --</option>
-                        @foreach ($clients as $client)
-                            <option value="{{$client->id}}" @if($client->id == old('client_id')) selected @endif>{{$client->name}} {{$client->last_name}}</option>
-                        @endforeach
-                    </select>
-                    @error('client_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <label for="start_time" class="control-label">Orario appuntamento*</label>
+                    <input type="datetime-local" name="start_time" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="employee_id">Dipendente*</label>
@@ -47,9 +40,13 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="comment">Commento</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                  </div>
                 <div class="mb-3">
                     <h4>Servizi*</h4>
-                    <ul>
+                    <ul class="list-group">
                         @foreach ($services as $service)
                             <li class="list-unstyled">
                                 <input class="@error('services') is-invalid @enderror" type="checkbox"

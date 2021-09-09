@@ -14,30 +14,30 @@
                     <label for="name" class="control-label">Nome*</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{$client->name}}" required maxlength="30" disabled>
                     @error('name')
-                        <div class="invalid-feedback">{{$message}}</div>
+                        <div class="text-danger">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="last_name" class="control-label">Cognome*</label>
                     <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{($client->last_name)}}" required maxlength="30" disabled>
                     @error('last_name')
-                        <div class="invalid-feedback">{{$message}}</div>
+                        <div class="text-danger">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="start_time" class="control-label">Orario appuntamento*</label>
-                    <input type="datetime-local" name="start_time" class="form-control">
+                    <input type="datetime-local" name="start_time" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="employee_id">Dipendente*</label>
-                    <select class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" id="employee_id">
+                    <select class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" id="employee_id" required>
                         <option value="">-- Seleziona dipendente --</option>
                         @foreach ($employees as $employee)
                             <option value="{{$employee->id}}" @if($employee->id == old('employee_id')) selected @endif>{{$employee->name}} {{$employee->last_name}}</option>
                         @endforeach
                     </select>
                     @error('employee_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
@@ -62,10 +62,10 @@
                         @endforeach
                     </ul>
                     @error('services')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-success text-uppercase">Salva</button>
+                <button id="sub-btn" type="submit" class="btn btn-success text-uppercase">Salva</button>
             </form>
         
     </div>

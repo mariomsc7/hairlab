@@ -47,6 +47,9 @@ class AppointmentController extends Controller
         $request->validate(
             [
                 'start_time' => 'required',
+                'employee_id' => 'required',
+                'client_id' => 'required',
+                'services' => 'required|exists:services,id',
             ],
             [
                 'required' => 'Il :attribute è richiesto!',
@@ -56,14 +59,20 @@ class AppointmentController extends Controller
             ]
         );
 
-        $new_service = Service::select('id', 'price')->get();
-        dd($new_service);
+        $services = Service::pluck('price','id');
+
         $data = $request->all();
-        dd($data['services']);
+        $data['tot_paid'] = 0;
+        foreach($data['services'] as $service){
+            $data['tot_paid'] += $services[$service];
+        }
+
         $new_appointment = new Appointment();
 
         $new_appointment->fill($data);
         $new_appointment->save();
+
+        $new_appointment->services()->attach($data['services']);
 
         return redirect()->route('admin.appointments.index');
     }

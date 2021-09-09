@@ -49881,7 +49881,29 @@ deleteConfirm.forEach(function (form) {
       e.preventDefault();
     }
   });
-});
+}); // Services required
+
+var btnType = document.getElementById("sub-btn");
+
+if (btnType) {
+  btnType.addEventListener("click", function (e) {
+    var check = document.querySelectorAll("input[id^=service]");
+    console.log(check);
+    var checked = [];
+    check.forEach(function (input) {
+      if (input.checked) {
+        checked.push(input);
+      }
+    });
+
+    if (checked.length == 0) {
+      alert("Seleziona almeno una tipologia");
+      e.preventDefault();
+    }
+  });
+} // Calendar
+
+
 document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -50042,8 +50064,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

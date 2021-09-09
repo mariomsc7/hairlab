@@ -42,6 +42,27 @@ deleteConfirm.forEach(form => {
     });
 });
 
+// Services required
+const btnType = document.getElementById("sub-btn");
+
+if (btnType) {
+    btnType.addEventListener("click", function(e) {
+        const check = document.querySelectorAll("input[id^=service]");
+        console.log(check);
+        const checked = [];
+        check.forEach(input => {
+            if (input.checked) {
+                checked.push(input);
+            }
+        });
+        if (checked.length == 0) {
+            alert("Seleziona almeno una tipologia");
+            e.preventDefault();
+        }
+    });
+}
+
+// Calendar
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {

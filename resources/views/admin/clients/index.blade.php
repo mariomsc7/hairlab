@@ -11,6 +11,7 @@
         @endif
         <a class="btn btn-success text-uppercase" href="{{route('admin.clients.create')}}">Aggiungi Cliente</a>
         <h1 class="mb-5 mt-5">Clienti:</h1>
+        {{$clients->links()}}
             <table class="table mt-3">
                 <thead>
                     <tr>

@@ -12,6 +12,7 @@
         <h2>Registra il cliente per un nuovo appuntamento</h2>
         <a class="btn btn-success" href="{{route('admin.clients.create')}}">Registra cliente</a>
         <h1 class="mb-5 mt-5">Appuntamenti:</h1>
+        {{$appointments->links()}}
         <table class="table mt-3">
             <thead>
                 <tr>

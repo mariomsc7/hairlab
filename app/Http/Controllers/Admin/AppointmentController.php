@@ -18,7 +18,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::all();
+        $appointments = Appointment::orderBy('start_time', 'desc')->paginate(3);
         
         return view('admin.appointments.index', compact('appointments'));
     }

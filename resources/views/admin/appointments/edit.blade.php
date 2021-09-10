@@ -5,7 +5,7 @@
     <div class="container">
             
             <h1>Modifica Appuntamento: </h1>
-            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Torna a appuntamenti</a>
+            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Ritorna in appuntamenti</a>
             <form method="POST" action="{{route('admin.appointments.update', $appointment->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')

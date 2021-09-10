@@ -5,7 +5,7 @@
     <div class="container">
             
             <h1>Modifica info dipendente: {{$employee->name}}</h1>
-            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.services.index')}}">Torna a dipendenti</a>
+            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.employees.index')}}">Torna a dipendenti</a>
             <form method="POST" action="{{route('admin.employees.update', $employee->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')

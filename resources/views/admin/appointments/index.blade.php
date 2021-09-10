@@ -4,29 +4,40 @@
     <div class="container">
         @if(session('deleted'))
         <div class="alert alert-success">
-            Appuntamento
+            Appuntamento di
             <strong>{{ session('deleted') }} </strong>
             rimosso.
         </div>
         @endif
-        <a class="btn btn-primary text-uppercase" href="{{route('admin.home')}}">Ritorna alla home</a>
-        
+        <h2>Registra il cliente per un nuovo appuntamento</h2>
+        <a class="btn btn-success" href="{{route('admin.clients.create')}}">Registra cliente</a>
         <h1 class="mb-5 mt-5">Appuntamenti:</h1>
-        @foreach($appointments as $appointment)
-            <hr>
-            <h3>Nome cliente: {{$appointment->client->name}} {{$appointment->client->last_name}}</h3>
-            <h3>Data: {{$appointment->start_time}}</h3>
-            <h3>Dipendente: {{$appointment->employee->name}}</h3>
-            @foreach($appointment->services as $service)
-                @if ($loop->last)
-                    <span>{{$service->name}}</span>
-                @else
-                    <span>{{$service->name}}, </span>
-                @endif
-            @endforeach
-            <div>{{$appointment->tot_paid}}</div>
-            <hr>
-        @endforeach
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Orario</th>
+                    <th>Cliente</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($appointments as $appointment)
+                    <tr>
+                        <td>{{$appointment->start_time}}</td>
+                        <td>{{$appointment->client->name}} {{$appointment->client->last_name}}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{{route('admin.appointments.show', $appointment->id)}}">Dettagli</a>
+                            <a class="btn btn-warning" href="{{route('admin.appointments.edit', $appointment->id)}}">Modifica</a>
+                            <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-danger" value="Elimina">
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
 @endsection

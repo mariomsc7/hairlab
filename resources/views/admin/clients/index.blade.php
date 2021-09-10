@@ -9,7 +9,6 @@
             rimosso.
         </div>
         @endif
-        <a class="btn btn-primary text-uppercase" href="{{route('admin.home')}}">Ritorna alla home</a>
         <a class="btn btn-success text-uppercase" href="{{route('admin.clients.create')}}">Aggiungi Cliente</a>
         <h1 class="mb-5 mt-5">Clienti:</h1>
             <table class="table mt-3">

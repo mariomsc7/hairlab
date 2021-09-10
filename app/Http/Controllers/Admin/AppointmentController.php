@@ -85,7 +85,8 @@ class AppointmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $appointment = Appointment::find($id);
+        return view('admin.appointments.show', compact('appointment'));
     }
 
     /**
@@ -96,7 +97,10 @@ class AppointmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employees = Employee::all();
+        $services = Service::all();
+        $appointment = Appointment::find($id);
+        return view('admin.appointments.edit', compact('services', 'employees', 'appointment'));
     }
 
     /**
@@ -108,7 +112,36 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'start_time' => 'required',
+                'employee_id' => 'required',
+                // 'client_id' => 'required',
+                'services' => 'required|exists:services,id',
+            ],
+            [
+                'required' => 'Il :attribute è richiesto!',
+                'max' => 'Massimo :max numeri per :attribute',
+                'unique' => ':attribute è già in uso',
+                'size' => 'Inserisci :size numeri'
+            ]
+        );
+
+        $services = Service::pluck('price','id');
+
+        $data = $request->all();
+        $data['tot_paid'] = 0;
+        foreach($data['services'] as $service){
+            $data['tot_paid'] += $services[$service];
+        }
+        
+        $appointment = Appointment::find($id);
+
+        $appointment->update($data);
+
+        $appointment->services()->sync($data['services']);
+
+        return redirect()->route('admin.appointments.index');
     }
 
     /**
@@ -119,6 +152,9 @@ class AppointmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $appointment = Appointment::find($id);
+        $appointment->services()->detach();
+        $appointment->delete();
+        return redirect()->route('admin.appointments.index')->with('deleted', $appointment->client->name.' '.$appointment->client->last_name.' del '.$appointment->start_time);
     }
 }

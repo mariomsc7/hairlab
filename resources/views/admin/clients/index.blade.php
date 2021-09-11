@@ -11,7 +11,17 @@
         @endif
         <a class="btn btn-success text-uppercase" href="{{route('admin.clients.create')}}">Aggiungi Cliente</a>
         <h1 class="mb-5 mt-5">Clienti:</h1>
-        {{$clients->links()}}
+        <div class="text-center">
+            <form action="{{route('admin.clients.index')}}">
+                <div>
+                    <label for="search">Cerca cliente</label>
+                </div>
+                <input type="text" name="search" id="search">
+                <button type="submit">Cerca</button>
+            </form>
+        </div>
+        @if (count($clients)>0)
+            {{$clients->links()}}
             <table class="table mt-3">
                 <thead>
                     <tr>
@@ -42,6 +52,10 @@
                     @endforeach
                 </tbody>
             </table>
+        @else
+            <p class="text-center mt-3"><strong>Nessun cliente trovato</strong></p>
+        @endif
+       
     </div>
 
 @endsection

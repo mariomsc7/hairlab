@@ -16,8 +16,14 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('created_at', 'desc')->paginate(3);
-        
+        $query = empty($_GET['search']) ? '' : $_GET['search'];
+
+        if($query !== '' ){
+            $clients = Client::where('name','LIKE','%'.$query.'%')->orWhere('last_name','LIKE','%'.$query.'%')->paginate(10);
+        } else {
+            $clients = Client::orderBy('created_at', 'desc')->paginate(10);
+        }
+        $clients->appends(['search' => $query]);
         return view('admin.clients.index', compact('clients'));
     }
 

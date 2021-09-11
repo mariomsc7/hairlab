@@ -62,7 +62,8 @@ class AppointmentController extends Controller
         $services = Service::pluck('price','id');
 
         $data = $request->all();
-        $data['tot_paid'] = 0;
+        $data['extra'] = intval($data['extra']);
+        $data['tot_paid'] = $data['extra'];
         foreach($data['services'] as $service){
             $data['tot_paid'] += $services[$service];
         }
@@ -130,7 +131,8 @@ class AppointmentController extends Controller
         $services = Service::pluck('price','id');
 
         $data = $request->all();
-        $data['tot_paid'] = 0;
+        $data['extra'] = intval($data['extra']);
+        $data['tot_paid'] = $data['extra'];
         foreach($data['services'] as $service){
             $data['tot_paid'] += $services[$service];
         }
@@ -141,7 +143,7 @@ class AppointmentController extends Controller
 
         $appointment->services()->sync($data['services']);
 
-        return redirect()->route('admin.appointments.index');
+        return redirect()->route('admin.appointments.show', $appointment->id );
     }
 
     /**

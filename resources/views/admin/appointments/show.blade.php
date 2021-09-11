@@ -30,6 +30,8 @@
                             @endif
                         @endforeach
                     </p>
+                    <h3>Extra:</h3>
+                    <p>€{{number_format($appointment->extra, 2)}}</p>
                     <h3>Prezzo:</h3>
                     <p>€{{number_format($appointment->tot_paid, 2)}}</p>
                 </div>

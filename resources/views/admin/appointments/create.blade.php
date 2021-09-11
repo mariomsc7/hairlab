@@ -65,6 +65,13 @@
                             <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label for="extra" class="extra">Extra</label>
+                    <input type="number" name="extra" class="form-control @error('extra') is-invalid @enderror" id="extra" value="{{old('extra')}}">
+                    @error('extra')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
+                </div>
                 <button id="sub-btn" type="submit" class="btn btn-success text-uppercase">Salva</button>
             </form>
         

@@ -12,7 +12,7 @@ class ClientsTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 5; $i++) {
+        for($i = 0; $i < 50; $i++) {
             $new_client = new Client();
 
             $new_client->name = 'Cliente' . ($i + 1);

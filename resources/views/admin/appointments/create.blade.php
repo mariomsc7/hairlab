@@ -6,6 +6,7 @@
             
             <h1>Registra Appuntamento: </h1>
             <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Torna a appuntamenti</a>
+            <a class="btn btn-success text-uppercase mb-3" href="{{route('admin.clients.index')}}">Torna a clienti</a>
             <form method="POST" action="{{route('admin.appointments.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')

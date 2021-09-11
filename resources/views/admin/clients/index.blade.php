@@ -11,6 +11,7 @@
         @endif
         <a class="btn btn-success text-uppercase" href="{{route('admin.clients.create')}}">Aggiungi Cliente</a>
         <h1 class="mb-5 mt-5">Clienti:</h1>
+        <a class="btn btn-success text-uppercase" href="{{route('admin.clients.index')}}">Aggiorna</a>
         <div class="text-center">
             <form action="{{route('admin.clients.index')}}">
                 <div>

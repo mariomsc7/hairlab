@@ -42,6 +42,21 @@ deleteConfirm.forEach(form => {
     });
 });
 
+// Payed confirmation message
+const payConfirm = document.querySelector("#pay");
+// deleteConfirm.forEach(form => {
+    if(payConfirm){
+        console.log(payConfirm);
+        payConfirm.addEventListener("submit", function(e) {
+            console.log('ciao');
+            const resp = confirm("Sei sicuro di voler spostare l'appuntamento in pagati?");
+            if (!resp) {
+                e.preventDefault();
+            }
+        });
+    }
+// });
+
 // Services required
 const btnType = document.getElementById("sub-btn");
 

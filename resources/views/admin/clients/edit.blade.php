@@ -10,16 +10,16 @@
                 @csrf
                 @method('PATCH')
                 <div class="mb-3">
-                    <label for="name" class="control-label">Nome*</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $client->name)}}" required maxlength="30">
-                    @error('name')
+                    <label for="last_name" class="control-label">Cognome*</label>
+                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{old('last_name', $client->last_name)}}" required maxlength="30">
+                    @error('last_name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="last_name" class="control-label">Cognome*</label>
-                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{old('last_name', $client->last_name)}}" required maxlength="30">
-                    @error('last_name')
+                    <label for="name" class="control-label">Nome*</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $client->name)}}" required maxlength="30">
+                    @error('name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>

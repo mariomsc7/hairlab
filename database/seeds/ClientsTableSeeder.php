@@ -15,9 +15,9 @@ class ClientsTableSeeder extends Seeder
         for($i = 0; $i < 50; $i++) {
             $new_client = new Client();
 
-            $new_client->name = 'Cliente' . ($i + 1);
-            $new_client->last_name = 'Cliente' . ($i + 1);
-            $new_client->phone_number = 3334445556;
+            $new_client->name = 'Cliente-Name' . ($i + 1);
+            $new_client->last_name = 'Cliente-Lastname' . ($i + 1);
+            $new_client->phone_number = (int) 333 . rand(1111111, 9999999);
             $new_client->email = 'cliente' . ($i + 1) . '@gmail.com';
 
             $new_client->save();

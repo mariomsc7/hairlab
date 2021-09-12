@@ -18,7 +18,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderBy('start_time', 'desc')->paginate(3);
+        $appointments = Appointment::where('done', 0)->orderBy('start_time', 'desc')->paginate(10);
         
         return view('admin.appointments.index', compact('appointments'));
     }
@@ -75,7 +75,7 @@ class AppointmentController extends Controller
 
         $new_appointment->services()->attach($data['services']);
 
-        return redirect()->route('admin.appointments.index');
+        return redirect()->route('admin.appointments.show', $new_appointment->id);
     }
 
     /**
@@ -117,7 +117,6 @@ class AppointmentController extends Controller
             [
                 'start_time' => 'required',
                 'employee_id' => 'required',
-                // 'client_id' => 'required',
                 'services' => 'required|exists:services,id',
             ],
             [
@@ -157,6 +156,30 @@ class AppointmentController extends Controller
         $appointment = Appointment::find($id);
         $appointment->services()->detach();
         $appointment->delete();
-        return redirect()->route('admin.appointments.index')->with('deleted', $appointment->client->name.' '.$appointment->client->last_name.' del '.$appointment->start_time);
+        if($appointment->done){
+            return redirect()->route('admin.appointments.done.index')->with('deleted', $appointment->client->last_name.' '.$appointment->client->name.' del '.$appointment->start_time);
+        }
+        return redirect()->route('admin.appointments.index')->with('deleted', $appointment->client->last_name.' '.$appointment->client->name.' del '.$appointment->start_time);
+    }
+
+    // Done
+    public function doneIndex()
+    {
+        $appointments = Appointment::where('done', 1)->orderBy('start_time', 'desc')->paginate(10);
+
+        return view('admin.done.index', compact('appointments'));
+    }
+
+    public function done($id){
+        $appointment = Appointment::find($id);
+        $appointment->done = 1;
+        $appointment->update();
+
+        $employee_id = $appointment->employee->id;
+        $employee = Employee::find($employee_id);
+        $employee->production += $appointment->tot_paid;
+        $employee->update();
+        
+        return redirect()->route('admin.appointments.done.index');
     }
 }

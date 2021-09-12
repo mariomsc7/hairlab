@@ -105,7 +105,7 @@ class EmployeeController extends Controller
             [
                 'name' => 'required|max:30',
                 'last_name' => 'required|max:30',
-                'phone_number' => ["required", Rule::unique('employees')->ignore($id), 'size:10'],
+                'phone_number' => ['required', Rule::unique('employees')->ignore($id), 'size:10'],
             ],
             [
                 'required' => 'Il :attribute è richiesto!',

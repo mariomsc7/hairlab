@@ -49881,7 +49881,23 @@ deleteConfirm.forEach(function (form) {
       e.preventDefault();
     }
   });
-}); // Services required
+}); // Payed confirmation message
+
+var payConfirm = document.querySelector("#pay"); // deleteConfirm.forEach(form => {
+
+if (payConfirm) {
+  console.log(payConfirm);
+  payConfirm.addEventListener("submit", function (e) {
+    console.log('ciao');
+    var resp = confirm("Sei sicuro di voler spostare l'appuntamento in pagati?");
+
+    if (!resp) {
+      e.preventDefault();
+    }
+  });
+} // });
+// Services required
+
 
 var btnType = document.getElementById("sub-btn");
 
@@ -50064,8 +50080,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

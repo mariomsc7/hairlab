@@ -15,9 +15,9 @@ class EmployeesTableSeeder extends Seeder
         for($i = 0; $i < 5; $i++) {
             $new_employee = new Employee();
 
-            $new_employee->name = 'Dipendente' . ($i + 1);
-            $new_employee->last_name = 'Dipendente' . ($i + 1);
-            $new_employee->phone_number = 3331112225;
+            $new_employee->name = 'Dipendente-Name' . ($i + 1);
+            $new_employee->last_name = 'Dipendente-Lastname' . ($i + 1);
+            $new_employee->phone_number = (int) 333 . rand(1111111, 9999999);
             $new_employee->production = 0;
 
             $new_employee->save();

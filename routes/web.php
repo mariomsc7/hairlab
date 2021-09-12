@@ -37,9 +37,14 @@ Route::prefix('admin')
         Route::resource('/services', 'ServiceController');
         // ROUTE DIPENDENTI
         Route::resource('/employees', 'EmployeeController');
+
         // ROUTE CLIENTI
         Route::resource('/clients', 'ClientController');
         // ROUTE Appuntamenti
         Route::resource('/appointments', 'AppointmentController', ['except' => ['create']]);
         Route::get('/appointments/{client_id}/create', 'AppointmentController@create')->name('appointments.create');
+        Route::get('/appointments/done/index', 'AppointmentController@doneIndex')->name('appointments.done.index');
+        Route::patch('/appointments/done/{appointment}', 'AppointmentController@done')->name('appointments.done.update');
+
+
     });

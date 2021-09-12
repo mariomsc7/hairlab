@@ -10,16 +10,16 @@
                 @csrf
                 @method('PATCH')
                 <div class="mb-3">
-                    <label for="name" class="control-label">Nome*</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $employee->name)}}" required maxlength="30">
-                    @error('name')
+                    <label for="last_name" class="control-label">Cognome*</label>
+                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{old('last_name', $employee->last_name)}}" required maxlength="30">
+                    @error('last_name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="last_name" class="control-label">Cognome*</label>
-                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{old('last_name', $employee->last_name)}}" required maxlength="30">
-                    @error('last_name')
+                    <label for="name" class="control-label">Nome*</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $employee->name)}}" required maxlength="30">
+                    @error('name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
@@ -28,6 +28,13 @@
                     <label for="phone_number" class="control-label">Numero di telefono*</label>
                     <input id="phone_number" name="phone_number" type="number" class="form-control @error('phone_number') is-invalid @enderror" value="{{old('phone_number', $employee->phone_number)}}" minlength="10" maxlength="10" required>
                     @error('phone_number')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="production" class="control-label">Produzione*</label>
+                    <input id="production" name="production" type="number" class="form-control @error('production') is-invalid @enderror" value="{{old('production', $employee->production)}}" minlength="10" maxlength="10" required>
+                    @error('production')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>

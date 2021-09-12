@@ -19,7 +19,7 @@ class ClientController extends Controller
         $query = empty($_GET['search']) ? '' : $_GET['search'];
 
         if($query !== '' ){
-            $clients = Client::where('name','LIKE','%'.$query.'%')->orWhere('last_name','LIKE','%'.$query.'%')->paginate(10);
+            $clients = Client::where('name','LIKE','%'.$query.'%')->orWhere('last_name','LIKE','%'.$query.'%')->orderBy('last_name')->paginate(10);
         } else {
             $clients = Client::orderBy('created_at', 'desc')->paginate(10);
         }
@@ -109,7 +109,7 @@ class ClientController extends Controller
             [
                 'name' => 'required|max:30',
                 'last_name' => 'required|max:30',
-                'phone_number' => ["required", Rule::unique('clients')->ignore($id), 'size:10'],
+                'phone_number' => ['required', Rule::unique('clients')->ignore($id), 'size:10'],
                 'email' => 'max:30',
             ],
             [

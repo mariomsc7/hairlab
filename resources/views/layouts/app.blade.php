@@ -47,7 +47,7 @@
                         <li><a class="btn btn-success mr-1" href="{{ route('admin.employees.index') }}">Mostra dipendenti</a></li>
                         <li><a class="btn btn-warning mr-1" href="{{ route('admin.clients.index') }}">Mostra clienti</a></li>
                         <li><a class="btn btn-secondary mr-1" href="{{ route('admin.appointments.index') }}">Mostra appuntamenti</a></li>
-                        <li><a class="btn btn-danger mr-1" href="#">Cassa</a></li>
+                        <li><a class="btn btn-danger mr-1" href="{{ route('admin.appointments.done.index') }}">Cassa</a></li>
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->

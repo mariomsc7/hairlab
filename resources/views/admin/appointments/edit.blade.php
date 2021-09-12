@@ -10,17 +10,16 @@
                 @csrf
                 @method('PATCH')
                 <div class="mb-3">
-                    {{-- <input type="number" name="client_id" value="{{$client->id}}" hidden> --}}
-                    <label for="name" class="control-label">Nome*</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{$appointment->client->name}}" required maxlength="30" disabled>
-                    @error('name')
+                    <label for="last_name" class="control-label">Cognome*</label>
+                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{($appointment->client->last_name)}}" required maxlength="30" disabled>
+                    @error('last_name')
                         <div class="text-danger">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="last_name" class="control-label">Cognome*</label>
-                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" id="last_name" value="{{($appointment->client->last_name)}}" required maxlength="30" disabled>
-                    @error('last_name')
+                    <label for="name" class="control-label">Nome*</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{$appointment->client->name}}" required maxlength="30" disabled>
+                    @error('name')
                         <div class="text-danger">{{$message}}</div>
                     @enderror
                 </div>

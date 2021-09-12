@@ -26,8 +26,8 @@
             <table class="table mt-3">
                 <thead>
                     <tr>
-                        <th>Nome</th>
                         <th>Cognome</th>
+                        <th>Nome</th>
                         <th>N.Telefono</th>
                         <th>Email</th>
                         <th>Azioni</th>
@@ -36,8 +36,8 @@
                 <tbody>
                     @foreach ($clients as $client)
                         <tr>
-                            <td>{{$client->name}}</td>
                             <td>{{$client->last_name}}</td>
+                            <td>{{$client->name}}</td>
                             <td>{{$client->phone_number}}</td>
                             <td>{{$client->email}}</td>
                             <td>

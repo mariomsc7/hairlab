@@ -183,3 +183,4 @@ class AppointmentController extends Controller
         return redirect()->route('admin.appointments.done.index');
     }
 }
+

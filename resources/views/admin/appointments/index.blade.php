@@ -20,6 +20,7 @@
                 <tr>
                     <th>Orario</th>
                     <th>Cliente</th>
+                    <th>Dipendente</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                     <tr>
                         <td>{{$appointment->start_time}}</td>
                         <td>{{$appointment->client->last_name}} {{$appointment->client->name}}</td>
+                        <td>{{$appointment->employee->last_name}} {{$appointment->employee->name}}</td>
                         <td>
                             <a class="btn btn-primary" href="{{route('admin.appointments.show', $appointment->id)}}">Dettagli</a>
                             <a class="btn btn-warning" href="{{route('admin.appointments.edit', $appointment->id)}}">Modifica</a>

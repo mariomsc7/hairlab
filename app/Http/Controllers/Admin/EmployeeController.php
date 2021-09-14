@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Employee;
+use App\Appointment;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -71,7 +72,14 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::find($id);
+        $appointments = Appointment::where('employee_id', $id)->orderBy('start_time', 'desc')->paginate(10);
+        $report = Appointment::selectRaw("MONTHNAME (start_time) as month, sum(tot_paid)")
+                            ->where('employee_id', $id)
+                            ->groupBy("month")
+                            ->get();
+                            // dd($report);
+        return view('admin.employees.show', compact('employee', 'appointments'));
     }
     
 

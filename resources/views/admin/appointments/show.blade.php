@@ -15,6 +15,7 @@
         @else
             <a class="btn btn-primary text-uppercase" href="{{route('admin.appointments.done.index')}}">Ritorna a storico</a>
         @endif
+        <a class="btn btn-primary text-uppercase" href="{{route('admin.employees.show', $appointment->employee->id)}}">Produzione dipendente</a>
         <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
             @csrf
             @method('DELETE')

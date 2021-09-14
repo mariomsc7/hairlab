@@ -29,6 +29,7 @@
                             <td>{{$employee->phone_number}}</td>
                             <td>€{{number_format($employee->production, 2)}}</td>
                             <td>
+                                <a class="btn btn-primary" href="{{route('admin.employees.show', $employee->id)}}">Dettagli</a>
                                 <a class="btn btn-warning" href="{{route('admin.employees.edit', $employee->id)}}">Modifica</a>
                                 <form class="delete-form d-inline-block" action="{{route('admin.employees.destroy', $employee->id)}}" method="POST">
                                     @csrf

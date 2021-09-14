@@ -16,6 +16,8 @@
             <tr>
                 <th>Orario</th>
                 <th>Cliente</th>
+                <th>Dipendente</th>
+                <th>Pagato</th>
                 <th>Azioni</th>
             </tr>
         </thead>
@@ -24,6 +26,8 @@
                 <tr>
                     <td>{{$appointment->start_time}}</td>
                     <td>{{$appointment->client->last_name}} {{$appointment->client->name}}</td>
+                    <td>{{$appointment->employee->last_name}} {{$appointment->employee->name}}</td>
+                    <td>€{{number_format($appointment->tot_paid, 2)}}</td>
                     <td>
                         <a class="btn btn-primary" href="{{route('admin.appointments.show', $appointment->id)}}">Dettagli</a>
                         <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">

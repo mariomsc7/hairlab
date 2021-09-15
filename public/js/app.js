@@ -49917,6 +49917,19 @@ if (btnType) {
       e.preventDefault();
     }
   });
+} // CLear date production
+
+
+var btnSub = document.getElementById("sub");
+var btnClear = document.getElementById("clear");
+var input = document.getElementById("month");
+console.log(btnClear);
+
+if (btnClear) {
+  btnClear.addEventListener("click", function (e) {
+    input.value = 0;
+    btnSub.click();
+  });
 } // Calendar
 
 
@@ -50080,8 +50093,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

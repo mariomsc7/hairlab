@@ -27,7 +27,7 @@
             <tbody>
                 @foreach ($appointments as $appointment)
                     <tr>
-                        <td>{{$appointment->start_time}}</td>
+                        <td>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y'))}}</td>
                         <td>{{$appointment->client->last_name}} {{$appointment->client->name}}</td>
                         <td>{{$appointment->employee->last_name}} {{$appointment->employee->name}}</td>
                         <td>

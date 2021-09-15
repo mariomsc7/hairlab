@@ -27,7 +27,7 @@
                 <h3>Nome cliente:</h3>
                 <p>{{$appointment->client->last_name}} {{$appointment->client->name}}</p>
                 <h3>Data:</h3>
-                <p>{{$appointment->start_time}}</p>
+                <p>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y'))}}</p>
                 <h3>Dipendente:</h3>
                 <p>{{$appointment->employee->name}}</p>
                 <h3>Servizi:</h3>

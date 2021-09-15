@@ -77,6 +77,18 @@ if (btnType) {
     });
 }
 
+// CLear date production
+const btnSub = document.getElementById("sub");
+const btnClear = document.getElementById("clear");
+const input = document.getElementById("month");
+console.log(btnClear);
+if (btnClear) {
+    btnClear.addEventListener("click", function(e) {
+        input.value = 0;
+        btnSub.click();
+    });
+}
+
 // Calendar
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');

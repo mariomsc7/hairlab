@@ -17,8 +17,8 @@
                 <div>
                     <label for="search">Cerca cliente</label>
                 </div>
-                <input type="text" name="search" id="search">
-                <button type="submit">Cerca</button>
+                <input type="text" name="search" id="search"> 
+                <button type="submit" class="btn btn-dark">Cerca</button>
             </form>
         </div>
         @if (count($clients)>0)

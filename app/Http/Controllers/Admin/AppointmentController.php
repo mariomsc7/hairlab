@@ -7,7 +7,11 @@ use App\Appointment;
 use App\Service;
 use App\Employee;
 use App\Client;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+
+// Set Locale Time Language Carbon
+setlocale(LC_TIME, 'it');
 
 class AppointmentController extends Controller
 {
@@ -19,6 +23,11 @@ class AppointmentController extends Controller
     public function index()
     {
         $appointments = Appointment::where('done', 0)->orderBy('start_time', 'desc')->paginate(10);
+
+        // Format start_time to Carbon time
+        foreach ($appointments as $appointment){
+            $appointment->start_time = Carbon::parse($appointment->start_time);
+        }
         
         return view('admin.appointments.index', compact('appointments'));
     }
@@ -87,6 +96,10 @@ class AppointmentController extends Controller
     public function show($id)
     {
         $appointment = Appointment::find($id);
+
+        // Format start_time to Carbon time
+        $appointment->start_time = Carbon::parse($appointment->start_time);
+        
         return view('admin.appointments.show', compact('appointment'));
     }
 
@@ -166,6 +179,11 @@ class AppointmentController extends Controller
     public function doneIndex()
     {
         $appointments = Appointment::where('done', 1)->orderBy('start_time', 'desc')->paginate(10);
+
+        // Format start_time to Carbon time
+        foreach ($appointments as $appointment){
+            $appointment->start_time = Carbon::parse($appointment->start_time);
+        }
 
         return view('admin.done.index', compact('appointments'));
     }

@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Employee;
 use App\Appointment;
+use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+
+// Set Locale Time Language
+setlocale(LC_TIME, 'it');
 
 class EmployeeController extends Controller
 {
@@ -74,12 +78,40 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $appointments = Appointment::where('employee_id', $id)->orderBy('start_time', 'desc')->paginate(10);
-        $report = Appointment::selectRaw("MONTHNAME (start_time) as month, sum(tot_paid)")
+
+        // Format start_time to Carbon time
+        foreach ($appointments as $appointment){
+            $appointment->start_time = Carbon::parse($appointment->start_time);
+        }
+
+        // Production
+        $query = empty($_GET['month']) ? '' : $_GET['month'];
+        
+        $report = Appointment::selectRaw("EXTRACT(YEAR_MONTH FROM start_time) as month, sum(tot_paid) as sum")
                             ->where('employee_id', $id)
+                            ->where('done', 1)
                             ->groupBy("month")
-                            ->get();
-                            // dd($report);
-        return view('admin.employees.show', compact('employee', 'appointments'));
+                            ->pluck('sum', 'month');
+                            
+        $report_arr = [];
+        foreach ($report as $key => $item){
+            $report_arr[$key] = $item;
+        }
+        
+        $total = $employee->production;
+
+        if($query !== '' && $query !== '0'){
+
+            $query_mod = str_replace('-', '', $query);
+
+            if(array_key_exists($query_mod, $report_arr)){
+                $total = $report_arr[$query_mod];
+            } else {
+                $total = 0;
+            }
+        }
+        
+        return view('admin.employees.show', compact('employee', 'appointments', 'total', 'query'));
     }
     
 

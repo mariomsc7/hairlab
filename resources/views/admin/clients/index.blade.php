@@ -42,6 +42,7 @@
                             <td>{{$client->email}}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{route('admin.appointments.create', $client->id)}}">Crea Appuntamento</a>
+                                <a class="btn btn-success" href="{{route('admin.clients.show', $client->id)}}">Dettagli</a>
                                 <a class="btn btn-warning" href="{{route('admin.clients.edit', $client->id)}}">Modifica</a>
                                 <form class="delete-form d-inline-block" action="{{route('admin.clients.destroy', $client->id)}}" method="POST">
                                     @csrf

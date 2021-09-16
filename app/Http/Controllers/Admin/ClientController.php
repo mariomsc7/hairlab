@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Client;
+use Carbon\Carbon;
+use App\Appointment;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+
+// Set Locale Time Language Carbon
+setlocale(LC_TIME, 'it');
 
 class ClientController extends Controller
 {
@@ -78,7 +83,16 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $client = Client::find($id);
+        
+        $appointments = Appointment::where('client_id', $id)->where('done', 1)->paginate(10);
+        // Format start_time to Carbon time
+        foreach ($appointments as $appointment){
+            $appointment->start_time = Carbon::parse($appointment->start_time);
+        }
+
+        return view('admin.clients.show', compact('client', 'appointments',));
     }
 
     /**

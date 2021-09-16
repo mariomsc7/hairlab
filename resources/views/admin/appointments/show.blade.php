@@ -15,6 +15,7 @@
         @else
             <a class="btn btn-primary text-uppercase" href="{{route('admin.appointments.done.index')}}">Ritorna a storico</a>
         @endif
+        <a class="btn btn-success text-uppercase" href="{{route('admin.clients.show', $appointment->client->id)}}">Dettaglio cliente</a>
         <a class="btn btn-primary text-uppercase" href="{{route('admin.employees.show', $appointment->employee->id)}}">Produzione dipendente</a>
         <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
             @csrf
@@ -27,7 +28,7 @@
                 <h3>Nome cliente:</h3>
                 <p>{{$appointment->client->last_name}} {{$appointment->client->name}}</p>
                 <h3>Data:</h3>
-                <p>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y'))}}</p>
+                <p>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y - %R'))}}</p>
                 <h3>Dipendente:</h3>
                 <p>{{$appointment->employee->name}}</p>
                 <h3>Servizi:</h3>

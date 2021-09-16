@@ -77,7 +77,16 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = Employee::find($id);
-        $appointments = Appointment::where('employee_id', $id)->orderBy('start_time', 'desc')->paginate(10);
+
+        $query = empty($_GET['month']) ? '' : $_GET['month'];
+        
+        if($query !== '' && $query !== '0'){
+            $query_mod = intval(str_replace('-', '', $query));
+            dump($query_mod);
+            $appointments = Appointment::where('employee_id', $id)->whereRaw("EXTRACT(YEAR_MONTH FROM start_time) =  $query_mod")->get();
+        } else {
+            $appointments = Appointment::where('employee_id', $id)->orderBy('start_time', 'desc')->paginate(10);
+        }
 
         // Format start_time to Carbon time
         foreach ($appointments as $appointment){
@@ -85,7 +94,6 @@ class EmployeeController extends Controller
         }
 
         // Production
-        $query = empty($_GET['month']) ? '' : $_GET['month'];
         
         $report = Appointment::selectRaw("EXTRACT(YEAR_MONTH FROM start_time) as month, sum(tot_paid) as sum")
                             ->where('employee_id', $id)

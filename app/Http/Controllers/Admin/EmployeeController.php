@@ -8,6 +8,7 @@ use App\Appointment;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // Set Locale Time Language
 setlocale(LC_TIME, 'it');
@@ -21,6 +22,12 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1){
+            abort(403);
+        }
+
         $employees = Employee::all();
         return view('admin.employees.index', compact('employees'));
     }
@@ -32,6 +39,12 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1){
+            abort(403);
+        }
+
         return view('admin.employees.create');
     }
 
@@ -76,14 +89,24 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1){
+            abort(403);
+        }
+
         $employee = Employee::find($id);
+
+        // Not Found
+        if(!$employee){
+            abort(404);
+        }
 
         $query = empty($_GET['month']) ? '' : $_GET['month'];
         
-        if($query !== '' && $query !== '0'){
+        if($query !== ''){
             $query_mod = intval(str_replace('-', '', $query));
-            dump($query_mod);
-            $appointments = Appointment::where('employee_id', $id)->whereRaw("EXTRACT(YEAR_MONTH FROM start_time) =  $query_mod")->get();
+            $appointments = Appointment::where('employee_id', $id)->whereRaw("EXTRACT(YEAR_MONTH FROM start_time) =  $query_mod")->paginate(10);
         } else {
             $appointments = Appointment::where('employee_id', $id)->orderBy('start_time', 'desc')->paginate(10);
         }
@@ -94,6 +117,7 @@ class EmployeeController extends Controller
         }
 
         // Production
+        $total = $employee->production;
         
         $report = Appointment::selectRaw("EXTRACT(YEAR_MONTH FROM start_time) as month, sum(tot_paid) as sum")
                             ->where('employee_id', $id)
@@ -106,20 +130,17 @@ class EmployeeController extends Controller
             $report_arr[$key] = $item;
         }
         
-        $total = $employee->production;
-
-        if($query !== '' && $query !== '0'){
+        $tot_month = 0;
+        if($query !== ''){
 
             $query_mod = str_replace('-', '', $query);
 
             if(array_key_exists($query_mod, $report_arr)){
-                $total = $report_arr[$query_mod];
-            } else {
-                $total = 0;
+                $tot_month = $report_arr[$query_mod];
             }
         }
         
-        return view('admin.employees.show', compact('employee', 'appointments', 'total', 'query'));
+        return view('admin.employees.show', compact('employee', 'appointments', 'total', 'tot_month', 'query'));
     }
     
 
@@ -129,16 +150,24 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    
-        {
-            $employee = Employee::find($id);
-            if (!$employee) {
-                abort(404);
-            }
-            return view('admin.employees.edit', compact('employee'));
+    public function edit($id) 
+    {
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1){
+            abort(403);
         }
-    
+        
+        $employee = Employee::find($id);
+
+        // Not Found
+        if(!$employee){
+            abort(404);
+        }
+
+        return view('admin.employees.edit', compact('employee'));
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -180,6 +209,12 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1){
+            abort(403);
+        }
+
         $employee = Employee::find($id);
         
         $employee->delete();

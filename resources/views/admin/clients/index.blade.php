@@ -10,15 +10,17 @@
         </div>
         @endif
         <a class="btn btn-success text-uppercase" href="{{route('admin.clients.create')}}">Aggiungi Cliente</a>
-        <h1 class="mb-5 mt-5">Clienti:</h1>
-        <a class="btn btn-success text-uppercase" href="{{route('admin.clients.index')}}">Aggiorna</a>
+        <h1 class="mt-5">Clienti:</h1>
         <div class="text-center">
             <form action="{{route('admin.clients.index')}}">
                 <div>
                     <label for="search">Cerca cliente</label>
                 </div>
                 <input type="text" name="search" id="search"> 
-                <button type="submit" class="btn btn-dark">Cerca</button>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-dark">Cerca</button>
+                    <a class="btn btn-warning" href="{{route('admin.clients.index')}}">Azzera Ricerca</a>
+                </div>
             </form>
         </div>
         @if (count($clients)>0)
@@ -42,13 +44,16 @@
                             <td>{{$client->email}}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{route('admin.appointments.create', $client->id)}}">Crea Appuntamento</a>
-                                <a class="btn btn-success" href="{{route('admin.clients.show', $client->id)}}">Dettagli</a>
+                                <a class="btn btn-success" href="{{route('admin.clients.show', $client->id)}}">Storico</a>
                                 <a class="btn btn-warning" href="{{route('admin.clients.edit', $client->id)}}">Modifica</a>
-                                <form class="delete-form d-inline-block" action="{{route('admin.clients.destroy', $client->id)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="submit" class="btn btn-danger" value="Elimina">
-                                </form>
+                                @if (Auth::id() === 1)
+
+                                    <form class="delete-form d-inline-block" action="{{route('admin.clients.destroy', $client->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" class="btn btn-danger" value="Elimina">
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

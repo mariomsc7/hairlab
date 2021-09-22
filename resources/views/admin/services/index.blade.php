@@ -16,7 +16,9 @@
                     <tr>
                         <th>Nome Servizio</th>
                         <th>Prezzo</th>
-                        <th>Azioni</th>
+                        @if (Auth::id() === 1)
+                            <th>Azioni</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -24,14 +26,16 @@
                         <tr>
                             <td>{{$service->name}}</td>
                             <td>€{{number_format($service->price, 2)}}</td>
-                            <td>
-                                <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica</a>
-                                <form class="delete-form d-inline-block" action="{{route('admin.services.destroy', $service->id)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="submit" class="btn btn-danger" value="Elimina">
-                                </form>
-                            </td>
+                            @if (Auth::id() === 1)
+                                <td>
+                                    <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica</a>
+                                    <form class="delete-form d-inline-block" action="{{route('admin.services.destroy', $service->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" class="btn btn-danger" value="Elimina">
+                                    </form>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

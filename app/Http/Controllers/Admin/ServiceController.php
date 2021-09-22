@@ -84,9 +84,18 @@ class ServiceController extends Controller
     
         {
             $service = Service::find($id);
-            if (!$service) {
+
+            // Not Found
+            if(!$service){
                 abort(404);
             }
+
+            // Check Permission
+            $user_id = Auth::id();
+            if($user_id != 1){
+                abort(403);
+            }
+
             return view('admin.services.edit', compact('service'));
         }
     
@@ -130,6 +139,12 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1){
+            abort(403);
+        }
+        
         $service = Service::find($id);
         $service->appointments()->detach();
 

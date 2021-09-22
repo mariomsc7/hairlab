@@ -11,9 +11,21 @@
         @endif
         <h2>Crea un nuovo appuntamento</h2>
         <a class="btn btn-success text-uppercase" href="{{route('admin.clients.index')}}">Crea appuntamento</a>
-        <h2 class="mt-5">Registra il cliente per un nuovo appuntamento</h2>
+        <h2 class="mt-3">Registra il cliente per un nuovo appuntamento</h2>
         <a class="btn btn-success text-uppercase" href="{{route('admin.clients.create')}}">Registra cliente</a>
-        <h1 class="mb-5 mt-5">Appuntamenti:</h1>
+        <div class="row">
+            <h1 class="mb-5 mt-5 col-md-6">Appuntamenti:</h1>
+            <div class="col-md-6">
+                <form action="{{route('admin.appointments.index')}}">
+                    <h3>Cerca per mese</h3>
+                    <input type="month" name="month" id="month" value="{{$query}}">
+                    <div class="mt-2">
+                        <button id="sub" type="submit" class="btn btn-dark">Filtra Mese</button>
+                        <button id="clear" type="button" class="btn btn-warning">Azzera Ricerca</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         {{$appointments->links()}}
         <table class="table mt-3">
             <thead>

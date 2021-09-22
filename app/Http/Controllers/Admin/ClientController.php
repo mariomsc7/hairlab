@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Appointment;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // Set Locale Time Language Carbon
 setlocale(LC_TIME, 'it');
@@ -85,6 +86,11 @@ class ClientController extends Controller
     {
 
         $client = Client::find($id);
+
+        // Not Found
+        if(!$client){
+            abort(404);
+        }
         
         $appointments = Appointment::where('client_id', $id)->where('done', 1)->paginate(10);
         // Format start_time to Carbon time
@@ -104,9 +110,12 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client = Client::find($id);
-        if (!$client) {
+
+        // Not Found
+        if(!$client){
             abort(404);
         }
+
         return view('admin.clients.edit', compact('client'));
     }
 
@@ -152,6 +161,12 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1){
+            abort(403);
+        }
+
         $client = Client::find($id);
         
         $client->delete();

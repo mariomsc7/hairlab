@@ -34,7 +34,7 @@ Route::prefix('admin')
         // ROUTE HOME ADMIN
         Route::get('/', 'HomeController@index')->name('home');
         // ROUTE SERVIZI
-        Route::resource('/services', 'ServiceController');
+        Route::resource('/services', 'ServiceController', ['except' => ['show']]);
         // ROUTE DIPENDENTI
         Route::resource('/employees', 'EmployeeController');
 
@@ -45,6 +45,8 @@ Route::prefix('admin')
         Route::get('/appointments/{client_id}/create', 'AppointmentController@create')->name('appointments.create');
         Route::get('/appointments/done/index', 'AppointmentController@doneIndex')->name('appointments.done.index');
         Route::patch('/appointments/done/{appointment}', 'AppointmentController@done')->name('appointments.done.update');
-
-
     });
+
+    Route::get('{any?}', function () {
+        abort(404);
+    })->where("any", ".*");

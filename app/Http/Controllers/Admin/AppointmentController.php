@@ -9,6 +9,7 @@ use App\Employee;
 use App\Client;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // Set Locale Time Language Carbon
 setlocale(LC_TIME, 'it');
@@ -22,14 +23,22 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::where('done', 0)->orderBy('start_time', 'desc')->paginate(10);
+        // Get Query
+        $query = empty($_GET['month']) ? '' : $_GET['month'];
+
+        if($query !== ''){
+            $query_mod = intval(str_replace('-', '', $query));
+            $appointments = Appointment::where('done', 0)->whereRaw("EXTRACT(YEAR_MONTH FROM start_time) =  $query_mod")->paginate(10);
+        } else {
+            $appointments = Appointment::where('done', 0)->orderBy('start_time', 'desc')->paginate(10);
+        }
 
         // Format start_time to Carbon time
         foreach ($appointments as $appointment){
             $appointment->start_time = Carbon::parse($appointment->start_time);
         }
         
-        return view('admin.appointments.index', compact('appointments'));
+        return view('admin.appointments.index', compact('appointments', 'query'));
     }
 
     /**
@@ -40,6 +49,12 @@ class AppointmentController extends Controller
     public function create($id)
     {
         $client = Client::find($id);
+
+        // Not Found
+        if(!$client){
+            abort(404);
+        }
+
         $employees = Employee::all();
         $services = Service::all();
         return view('admin.appointments.create', compact('services', 'employees', 'client'));
@@ -97,6 +112,12 @@ class AppointmentController extends Controller
     {
         $appointment = Appointment::find($id);
 
+        // Not Found
+        if(!$appointment){
+            abort(404);
+        }
+
+
         // Format start_time to Carbon time
         $appointment->start_time = Carbon::parse($appointment->start_time);
         
@@ -114,6 +135,12 @@ class AppointmentController extends Controller
         $employees = Employee::all();
         $services = Service::all();
         $appointment = Appointment::find($id);
+        
+        // Not Found
+        if(!$appointment){
+            abort(404);
+        }
+        
         return view('admin.appointments.edit', compact('services', 'employees', 'appointment'));
     }
 
@@ -167,6 +194,13 @@ class AppointmentController extends Controller
     public function destroy($id)
     {
         $appointment = Appointment::find($id);
+
+        // Check Permission
+        $user_id = Auth::id();
+        if($user_id != 1 && $appointment->done === 1){
+            abort(403);
+        }
+        
         $appointment->services()->detach();
         $appointment->delete();
         if($appointment->done){
@@ -178,14 +212,46 @@ class AppointmentController extends Controller
     // Done
     public function doneIndex()
     {
-        $appointments = Appointment::where('done', 1)->orderBy('start_time', 'desc')->paginate(10);
+        // Get Query
+        $query = empty($_GET['month']) ? '' : $_GET['month'];
+
+        if($query !== ''){
+            $query_mod = intval(str_replace('-', '', $query));
+            $appointments = Appointment::where('done', 1)->whereRaw("EXTRACT(YEAR_MONTH FROM start_time) =  $query_mod")->paginate(10);
+        } else {
+            $appointments = Appointment::where('done', 1)->orderBy('start_time', 'desc')->paginate(10);
+        }
 
         // Format start_time to Carbon time
         foreach ($appointments as $appointment){
             $appointment->start_time = Carbon::parse($appointment->start_time);
         }
 
-        return view('admin.done.index', compact('appointments'));
+        // Get Total of Current Year
+        $year = date('Y');
+        $tot_year = Appointment::where('done', 1)->whereRaw("YEAR(start_time) = $year")->sum('tot_paid');
+
+        // Get Total of single month
+        $report = Appointment::selectRaw("EXTRACT(YEAR_MONTH FROM start_time) as month, sum(tot_paid) as sum")
+                                ->where('done', 1)
+                                ->groupBy("month")
+                                ->pluck('sum', 'month');
+        $report_arr = [];
+        foreach ($report as $key => $item){
+            $report_arr[$key] = $item;
+        }
+
+        $total = 0;
+        if($query !== ''){
+
+            $query_mod = str_replace('-', '', $query);
+
+            if(array_key_exists($query_mod, $report_arr)){
+                $total = $report_arr[$query_mod];
+            }
+        }
+
+        return view('admin.done.index', compact('appointments', 'query', 'tot_year', 'total'));
     }
 
     public function done($id){

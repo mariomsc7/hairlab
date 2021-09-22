@@ -63,7 +63,6 @@ const btnType = document.getElementById("sub-btn");
 if (btnType) {
     btnType.addEventListener("click", function(e) {
         const check = document.querySelectorAll("input[id^=service]");
-        console.log(check);
         const checked = [];
         check.forEach(input => {
             if (input.checked) {
@@ -77,11 +76,13 @@ if (btnType) {
     });
 }
 
-// CLear date production
+// window.axios = require('axios');
+// console.log(axios);
+
+// CLear date production/date payments
 const btnSub = document.getElementById("sub");
 const btnClear = document.getElementById("clear");
 const input = document.getElementById("month");
-console.log(btnClear);
 if (btnClear) {
     btnClear.addEventListener("click", function(e) {
         input.value = 0;

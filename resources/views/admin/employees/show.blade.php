@@ -16,7 +16,10 @@
             @method('DELETE')
             <input type="submit" class="btn btn-danger" value="Elimina">
         </form>
-        <h1 class="mb-5 mt-5">Dettagli produzione:</h1>
+        <div class="row mb-5 mt-5">
+            <h1 class="col-md-6">Dettagli produzione:</h1>
+            <h2 class="mt-2 col-md-6">Totale: €{{number_format($total, 2)}}</h2>
+        </div>
             <div class="row">
                 <div class="col-md-6">
                     <h3>Nome dipendente:</h3>
@@ -32,7 +35,9 @@
                             <button id="sub" type="submit" class="btn btn-dark">Filtra Mese</button>
                             <button id="clear" type="button" class="btn btn-warning">Azzera Ricerca</button>
                         </div>
-                        <h4 class="mt-2">Tot: €{{number_format($total, 2)}}</h4>
+                        @if ($query !== '')
+                            <h4 class="mt-2">Tot: €{{number_format($tot_month, 2)}}</h4>
+                        @endif
                     </form>
                 </div>
             </div>

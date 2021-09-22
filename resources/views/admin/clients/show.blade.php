@@ -9,7 +9,7 @@
             @method('DELETE')
             <input type="submit" class="btn btn-danger" value="Elimina">
         </form>
-        <h1 class="mb-5 mt-5">Storico appuntamenti:</h1>
+        <h1 class="mb-5 mt-5">Storico appuntamenti cliente:</h1>
         <h3>{{$client->name}} {{$client->last_name}}</h3>
         <table class="table mt-3">
             <thead>

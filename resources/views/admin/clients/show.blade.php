@@ -11,6 +11,7 @@
         </form>
         <h1 class="mb-5 mt-5">Storico appuntamenti cliente:</h1>
         <h3>{{$client->name}} {{$client->last_name}}</h3>
+        {{$appointments->links()}}
         <table class="table mt-3">
             <thead>
                 <tr>

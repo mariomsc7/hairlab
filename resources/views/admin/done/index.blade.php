@@ -47,7 +47,7 @@
                     <td>€{{number_format($appointment->tot_paid, 2)}}</td>
                     <td>
                         <a class="btn btn-primary" href="{{route('admin.appointments.show', $appointment->id)}}">Dettagli</a>
-                        @if (Auth::id() === 1)
+                        @if (Auth::id() === 1 && $appointment->start_time->format('Y') != $year)
                             <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')

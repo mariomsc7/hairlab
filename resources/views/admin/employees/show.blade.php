@@ -14,7 +14,7 @@
         <form class="delete-form d-inline-block" action="{{route('admin.employees.destroy', $employee->id)}}" method="POST">
             @csrf
             @method('DELETE')
-            <input type="submit" class="btn btn-danger" value="Elimina">
+            <input type="submit" class="btn btn-danger text-uppercase" value="Elimina">
         </form>
         <div class="row mb-5 mt-5">
             <h1 class="col-md-6">Dettagli produzione:</h1>

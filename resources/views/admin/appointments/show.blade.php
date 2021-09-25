@@ -20,12 +20,13 @@
         @if (Auth::id() === 1)
             <a class="btn btn-primary text-uppercase" href="{{route('admin.employees.show', $appointment->employee->id)}}">Produzione dipendente</a>
         @endif
-        
+        @if (Auth::id() === 1 || $appointment->done === 0)
         <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
             @csrf
             @method('DELETE')
-            <input type="submit" class="btn btn-danger" value="Elimina">
+            <input type="submit" class="btn btn-danger text-uppercase" value="Elimina">
         </form>
+        @endif
         <h1 class="mb-5 mt-5">Dettagli appuntamento:</h1>
         <div class="row">
             <div class="col-md-4">

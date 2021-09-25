@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
             <a class="btn btn-primary text-uppercase" href="{{route('admin.clients.index')}}">Ritorna in clienti</a>
-
+            <a class="btn btn-success text-uppercase" href="{{route('admin.appointments.create', $client->id)}}">Crea Appuntamento</a>
         <form class="delete-form d-inline-block" action="{{route('admin.clients.destroy', $client->id)}}" method="POST">
             @csrf
             @method('DELETE')
-            <input type="submit" class="btn btn-danger" value="Elimina">
+            <input type="submit" class="btn btn-danger text-uppercase" value="Elimina">
         </form>
         <h1 class="mb-5 mt-5">Storico appuntamenti cliente:</h1>
         <h3>{{$client->name}} {{$client->last_name}}</h3>

@@ -251,7 +251,7 @@ class AppointmentController extends Controller
             }
         }
 
-        return view('admin.done.index', compact('appointments', 'query', 'tot_year', 'total'));
+        return view('admin.done.index', compact('appointments', 'query', 'tot_year', 'total', 'year'));
     }
 
     public function done($id){

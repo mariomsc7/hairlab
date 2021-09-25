@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     protected $fillable = [
-        "start_time", "comment", "tot_paid", 'extra', 'client_id', 'employee_id'
+        "start_time", "comment", "tot_paid", 'extra', 'client_id', 'employee_id', 'end_time'
     ];
 
     public function client()

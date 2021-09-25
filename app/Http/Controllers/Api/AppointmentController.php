@@ -13,12 +13,11 @@ class AppointmentController extends Controller
         $events = [];
         foreach ($appointments as $appointment){
             $event = [];
-            $event['name'] = $appointment->client->name;
-            $event['start_time'] = $appointment->start_time;
-            // $event['end_time'] = $appointment->client->name;
+            $event['title'] = $appointment->client->name;
+            $event['start'] = $appointment->start_time;
+            $event['end'] = $appointment->end_time;
             $events[] = $event;
         }
         return response()->json($events);
-
     }
 }

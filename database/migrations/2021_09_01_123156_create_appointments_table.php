@@ -19,12 +19,12 @@ class CreateAppointmentsTable extends Migration
             $table->string('comment')->nullable();
             $table->float('tot_paid', 5,2);
             $table->float('extra', 5,2)->nullable();
-            $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('client_id')->nullable();
+            $table->unsignedBigInteger('employee_id')->nullable();
             $table->boolean('done')->default('0');
             $table->timestamps();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('set null');
         });
     }
 

@@ -8,6 +8,7 @@ use App\Service;
 use App\Employee;
 use App\Client;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,7 +58,8 @@ class AppointmentController extends Controller
 
         $employees = Employee::all();
         $services = Service::all();
-        return view('admin.appointments.create', compact('services', 'employees', 'client'));
+        $minutes = ['00', '15', '30', '45'];
+        return view('admin.appointments.create', compact('services', 'employees', 'client', 'minutes'));
     }
 
     /**
@@ -70,8 +72,18 @@ class AppointmentController extends Controller
     {
         $request->validate(
             [
-                'start_time' => 'required',
-                'employee_id' => 'required',
+                'appointment_day' => 'required',
+                'start_hour' => 'required',
+                'start_minute' => 'required',
+                'end_hour' => 'required|gte:start_hour',
+                'end_minute' => ['required', 
+                                function ($attribute, $value, $fail) use ($request){
+                                    if ($request->input('start_hour') === $request->input('end_hour') && $value <= $request->input('start_minute')) {
+                                        $fail($attribute.' must be greater than ' . $request->input('start_minute'));
+                                    }
+                                }
+                            ],
+                'employee_id' => 'required|exists:services,id',
                 'client_id' => 'required',
                 'services' => 'required|exists:services,id',
             ],
@@ -84,8 +96,12 @@ class AppointmentController extends Controller
         );
 
         $services = Service::pluck('price','id');
-
+        
         $data = $request->all();
+
+        $data['start_time'] = $data['appointment_day'] . ' ' . $data['start_hour'] .':' . $data['start_minute'] . ':00';
+        $data['end_time'] = $data['appointment_day'] . ' ' . $data['end_hour'] .':' . $data['end_minute'] . ':00';
+
         $data['extra'] = intval($data['extra']);
         $data['tot_paid'] = $data['extra'];
         foreach($data['services'] as $service){
@@ -120,6 +136,7 @@ class AppointmentController extends Controller
 
         // Format start_time to Carbon time
         $appointment->start_time = Carbon::parse($appointment->start_time);
+        $appointment->end_time = Carbon::parse($appointment->end_time);
         
         return view('admin.appointments.show', compact('appointment'));
     }
@@ -140,8 +157,18 @@ class AppointmentController extends Controller
         if(!$appointment){
             abort(404);
         }
-        
-        return view('admin.appointments.edit', compact('services', 'employees', 'appointment'));
+        $dt_start = DateTime::createFromFormat("Y-m-d H:i:s", $appointment->start_time);
+        $dt_end = DateTime::createFromFormat("Y-m-d H:i:s", $appointment->end_time);
+        // dd($dt_end->format('H'));
+        $appointment_day = $dt_start->format('Y-m-d');
+        $start_hour = $dt_start->format('H');
+        $start_minute = $dt_start->format('i');
+        $end_hour = $dt_end->format('H');
+        $end_minute = $dt_end->format('i');
+
+        $minutes = ['00', '15', '30', '45'];
+
+        return view('admin.appointments.edit', compact('services', 'employees', 'appointment', 'appointment_day', 'start_hour', 'start_minute', 'end_hour', 'end_minute', 'minutes'));
     }
 
     /**
@@ -153,10 +180,22 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $request->validate(
             [
-                'start_time' => 'required',
+                'appointment_day' => 'required',
+                'start_hour' => 'required',
+                'start_minute' => 'required',
+                'end_hour' => 'required|gte:start_hour',
+                'end_minute' => ['required', 
+                                function ($attribute, $value, $fail) use ($request){
+                                    if ($request->input('start_hour') === $request->input('end_hour') && $value <= $request->input('start_minute')) {
+                                        $fail($attribute.' must be greater than ' . $request->input('start_minute'));
+                                    }
+                                }
+                            ],
                 'employee_id' => 'required',
+                'client_id' => 'required',
                 'services' => 'required|exists:services,id',
             ],
             [
@@ -166,10 +205,12 @@ class AppointmentController extends Controller
                 'size' => 'Inserisci :size numeri'
             ]
         );
-
         $services = Service::pluck('price','id');
 
         $data = $request->all();
+        $data['start_time'] = $data['appointment_day'] . ' ' . $data['start_hour'] .':' . $data['start_minute'] . ':00';
+        $data['end_time'] = $data['appointment_day'] . ' ' . $data['end_hour'] .':' . $data['end_minute'] . ':00';
+
         $data['extra'] = intval($data['extra']);
         $data['tot_paid'] = $data['extra'];
         foreach($data['services'] as $service){

@@ -40,8 +40,17 @@
                 @foreach ($appointments as $appointment)
                     <tr>
                         <td>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y'))}}</td>
-                        <td>{{$appointment->client->last_name}} {{$appointment->client->name}}</td>
-                        <td>{{$appointment->employee->last_name}} {{$appointment->employee->name}}</td>
+                        @if ($appointment->client)
+                            <td>{{$appointment->client->last_name}} {{$appointment->client->name}}</td>
+                        @else
+                            <td class="text-danger"><em>Nessun Dato</em></td>
+                        @endif
+                        
+                        @if ($appointment->employee)
+                            <td>{{$appointment->employee->last_name}} {{$appointment->employee->name}}</td>
+                        @else
+                            <td class="text-danger"><em>Nessun Dato</em></td>
+                        @endif
                         <td>
                             <a class="btn btn-primary" href="{{route('admin.appointments.show', $appointment->id)}}">Dettagli</a>
                             <a class="btn btn-warning" href="{{route('admin.appointments.edit', $appointment->id)}}">Modifica</a>

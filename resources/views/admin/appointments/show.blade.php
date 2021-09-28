@@ -15,9 +15,12 @@
         @else
             <a class="btn btn-primary text-uppercase" href="{{route('admin.appointments.done.index')}}">Ritorna a storico</a>
         @endif
-        <a class="btn btn-success text-uppercase" href="{{route('admin.clients.show', $appointment->client->id)}}">Dettaglio cliente</a>
 
-        @if (Auth::id() === 1)
+        @if ($appointment->client)
+            <a class="btn btn-success text-uppercase" href="{{route('admin.clients.show', $appointment->client->id)}}">Dettaglio cliente</a>
+        @endif
+
+        @if (Auth::id() === 1 && $appointment->employee)
             <a class="btn btn-primary text-uppercase" href="{{route('admin.employees.show', $appointment->employee->id)}}">Produzione dipendente</a>
         @endif
         @if (Auth::id() === 1 || $appointment->done === 0)
@@ -31,11 +34,19 @@
         <div class="row">
             <div class="col-md-4">
                 <h3>Nome cliente:</h3>
-                <p>{{$appointment->client->last_name}} {{$appointment->client->name}}</p>
+                @if ($appointment->client)
+                    <p>{{$appointment->client->last_name}} {{$appointment->client->name}}</p>
+                @else
+                    <p class="text-danger"><em>Nessun Dato</em></p>
+                @endif
                 <h3>Data:</h3>
-                <p>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y - %R'))}}</p>
+                <p>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y - %R'))}} -> {{ucfirst($appointment->end_time->formatLocalized('%R'))}}</p>
                 <h3>Dipendente:</h3>
-                <p>{{$appointment->employee->name}}</p>
+                @if ($appointment->employee)
+                    <p>{{$appointment->employee->name}}</p>
+                @else
+                    <p class="text-danger"><em>Nessun Dato</em></p>
+                @endif                
                 <h3>Servizi:</h3>
                 <p>
                     @foreach($appointment->services as $service)

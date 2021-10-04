@@ -9,10 +9,15 @@
             rimosso.
         </div>
         @endif
-        <a class="btn btn-success text-uppercase" href="{{route('admin.employees.create')}}">Aggiungi Dipendente</a>
-        <h1 class="mb-5 mt-5">Dipendenti:</h1>
+        <a class="bn1 text-uppercase" href="{{route('admin.employees.create')}}">Aggiungi Dipendente <i class="ml-2 fas fa-user-plus"></i></a>
+        <div class="d-flex mt-5 mb-5 justify-content-center">
+            <div class="card">
+                <h1>Dipendenti <i class="ml-3 fas fa-users-cog"></i></h1>
+            </div>
+        </div>
+        <div class="table-responsive">
             <table class="table mt-3">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                         <th>Cognome</th>
                         <th>Nome</th>
@@ -29,18 +34,19 @@
                             <td>{{$employee->phone_number}}</td>
                             <td>€{{number_format($employee->production, 2)}}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{route('admin.employees.show', $employee->id)}}">Dettagli</a>
-                                <a class="btn btn-warning" href="{{route('admin.employees.edit', $employee->id)}}">Modifica</a>
+                                <a class="btn btn-primary" href="{{route('admin.employees.show', $employee->id)}}">Dettagli <i class="fas fa-info-circle"></i></a>
+                                <a class="btn btn-warning" href="{{route('admin.employees.edit', $employee->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
                                 <form class="delete-form d-inline-block" action="{{route('admin.employees.destroy', $employee->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" class="btn btn-danger" value="Elimina">
+                                    <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+        </div>
     </div>
 
 @endsection

@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -42,14 +42,14 @@
                     @guest
                     @else
                     <ul class="navbar-nav m-auto">
-                        <li><a class="btn btn-light mr-1" href="{{ route('admin.home') }}">Home</a></li>
-                        <li><a class="btn btn-primary mr-1" href="{{ route('admin.services.index') }}">Mostra servizi</a></li>
+                        <li><a class="btn41-43 btn-42 mr-1 text-center" href="{{ route('admin.home') }}">Home <i class="fas fa-home"></i> </a></li>
+                        <li><a class="btn41-43 btn-42 mr-1 text-center" href="{{ route('admin.services.index') }}">Servizi <i class="fas fa-cut"></i></a></li>
                         @if (Auth::id() === 1)
-                            <li><a class="btn btn-success mr-1" href="{{ route('admin.employees.index') }}">Mostra dipendenti</a></li>
+                            <li><a class="btn41-43 btn-42 mr-1 text-center" href="{{ route('admin.employees.index') }}">Dipendenti <i class="fas fa-users-cog"></i></a></li>
                         @endif
-                        <li><a class="btn btn-warning mr-1" href="{{ route('admin.clients.index') }}">Mostra clienti</a></li>
-                        <li><a class="btn btn-secondary mr-1" href="{{ route('admin.appointments.index') }}">Mostra appuntamenti</a></li>
-                        <li><a class="btn btn-danger mr-1" href="{{ route('admin.appointments.done.index') }}">Cassa</a></li>
+                        <li><a class="btn41-43 btn-42 mr-1 text-center" href="{{ route('admin.clients.index') }}">Clienti <i class="fas fa-users"></i></a></li>
+                        <li><a class="btn41-43 btn-42 mr-1 text-center" href="{{ route('admin.appointments.index') }}">Appuntamenti <i class="fas fa-address-book"></i></a></li>
+                        <li><a class="btn41-43 btn-42 mr-1 text-center" href="{{ route('admin.appointments.done.index') }}">Cassa <i class="fas fa-coins"></i></a></li>
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
@@ -66,7 +66,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="mt-3 nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 

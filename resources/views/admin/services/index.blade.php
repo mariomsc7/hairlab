@@ -9,10 +9,15 @@
             cancellato.
         </div>
         @endif
-        <a class="btn btn-success text-uppercase" href="{{route('admin.services.create')}}">Aggiungi Servizio</a>
-        <h1 class="mb-5 mt-5">Servizi:</h1>
+        <a class="bn1 text-uppercase" href="{{route('admin.services.create')}}">Aggiungi Servizio <i class="ml-2 fas fa-cut"></i></a>
+        <div class="d-flex mt-5 mb-5 justify-content-center">
+            <div class="card">
+                <h1>Servizi <i class="ml-3 fas fa-cut"></i></h1>
+            </div>
+        </div>
+        <div class="table-responsive">
             <table class="table mt-3">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                         <th>Nome Servizio</th>
                         <th>Prezzo</th>
@@ -28,11 +33,11 @@
                             <td>€{{number_format($service->price, 2)}}</td>
                             @if (Auth::id() === 1)
                                 <td>
-                                    <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica</a>
+                                    <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
                                     <form class="delete-form d-inline-block" action="{{route('admin.services.destroy', $service->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="submit" class="btn btn-danger" value="Elimina">
+                                        <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
                                     </form>
                                 </td>
                             @endif
@@ -40,6 +45,7 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
     </div>
 
 @endsection

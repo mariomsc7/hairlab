@@ -49936,25 +49936,40 @@ if (btnClear) {
 document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'timeGridWeek',
+    initialView: 'listWeek',
+    views: {
+      listDay: {
+        buttonText: 'Giorno'
+      },
+      listWeek: {
+        buttonText: 'Settimana'
+      },
+      listMonth: {
+        buttonText: 'Mese'
+      }
+    },
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,listWeek,dayGridDay'
+      right: 'listDay,listWeek,listMonth'
     },
     nowIndicator: true,
-    //   businessHours: {
-    //     // days of week. an array of zero-based day of week integers (0=Sunday)
-    //     daysOfWeek: [ 2, 3, 4, 5, 6 ], // 
-    //     // startTime: '8:00', // a start time (10am in this example)
-    //     // endTime: '20:00', // an end time (6pm in this example)
-    //   },
+    events: 'http://127.0.0.1:8000/api/appointments',
+    eventDidMount: function eventDidMount(info) {
+      if (info.event.extendedProps.status === 1) {
+        // Change background color of row
+        info.el.style.backgroundColor = 'lightgrey'; // Change color of dot marker
+
+        var dotEl = info.el.getElementsByClassName('fc-event-dot')[0];
+
+        if (dotEl) {
+          dotEl.style.backgroundColor = 'white';
+        }
+      }
+    },
     slotMinTime: '8:00:00',
     slotMaxTime: '21:00:00',
-    locale: 'it',
-    dateClick: function dateClick() {
-      alert('a day has been clicked!');
-    }
+    locale: 'it'
   });
   calendar.render();
 });
@@ -50093,8 +50108,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\homepc\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mario\Desktop\hairlab\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

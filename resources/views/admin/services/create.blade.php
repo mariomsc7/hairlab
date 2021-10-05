@@ -4,7 +4,7 @@
 
     <div class="container">
             
-        <a class="btn41-43 btn-42 text-uppercase mb-3" href="{{route('admin.services.index')}}">Servizi <i class="ml-2 fas fa-cut"></i></a>
+        <a class="bn1 text-uppercase mb-3" href="{{route('admin.services.index')}}">Servizi <i class="ml-2 fas fa-cut"></i></a>
             <h1>Aggiungi Servizio: </h1>
             <form method="POST" action="{{route('admin.services.store')}}" enctype="multipart/form-data">
                 @csrf
@@ -24,7 +24,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn41-43 btn-42 text-uppercase">Salva</button>
+                <button type="submit" class="bn1 text-uppercase">Salva</button>
                 
 
             </form>

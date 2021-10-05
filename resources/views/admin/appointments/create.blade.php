@@ -4,9 +4,9 @@
 
     <div class="container">
             
-            <h1>Registra Appuntamento: </h1>
-            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Torna a appuntamenti</a>
-            <a class="btn btn-success text-uppercase mb-3" href="{{route('admin.clients.index')}}">Torna a clienti</a>
+            <h1 class="mt-3 mb-4">Registra Appuntamento</h1>
+            <a class="bn1 text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Appuntamenti <i class="fas fa-address-book"></i></a>
+            <a class="bn1 text-uppercase mb-3" href="{{route('admin.clients.index')}}">Clienti <i class="fas fa-users"></i></a>
             <form method="POST" action="{{route('admin.appointments.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -149,7 +149,7 @@
                 </div>
 
                 {{-- Submit --}}
-                <button id="sub-btn" type="submit" class="btn btn-success text-uppercase">Salva</button>
+                <button id="sub-btn" type="submit" class="bn1 text-uppercase">Salva</button>
             </form>
         
     </div>

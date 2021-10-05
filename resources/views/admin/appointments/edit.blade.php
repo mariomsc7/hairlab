@@ -5,7 +5,7 @@
     <div class="container">
             
             <h1>Modifica Appuntamento: </h1>
-            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Ritorna in appuntamenti</a>
+            <a class="bn1 text-uppercase mb-3" href="{{route('admin.appointments.index')}}">Appuntamenti <i class="fas fa-address-book"></i></a>
             <form method="POST" action="{{route('admin.appointments.update', $appointment->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -152,7 +152,7 @@
                 </div>
 
                 {{-- Submit --}}
-                <button id="sub-btn" type="submit" class="btn btn-success text-uppercase">Salva</button>
+                <button id="sub-btn" type="submit" class="bn1 text-uppercase">Salva</button>
             </form>
         
     </div>

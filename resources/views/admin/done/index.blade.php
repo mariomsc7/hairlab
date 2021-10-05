@@ -43,9 +43,8 @@
     </div>
     {{$appointments->links()}}
     <div class="table-responsive">
-
         <table class="table mt-3 mb-5">
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th>Orario</th>
                     <th>Cliente</th>
@@ -57,28 +56,41 @@
             <tbody>
                 @foreach ($appointments as $appointment)
                     <tr>
-                        <td>{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y'))}}</td>
+                        <td class="pt-4">{{ucfirst($appointment->start_time->formatLocalized('%a %d/%m/%Y'))}}</td>
                         @if ($appointment->client)
-                            <td>{{$appointment->client->last_name}} {{$appointment->client->name}}</td>
+                            <td class="pt-4">{{$appointment->client->last_name}} {{$appointment->client->name}}</td>
                         @else
-                            <td class="text-danger"><em>Nessun Dato</em></td>
+                            <td class="text-danger pt-4"><em>Nessun Dato</em></td>
                         @endif
                         
                         @if ($appointment->employee)
-                            <td>{{$appointment->employee->last_name}} {{$appointment->employee->name}}</td>
+                            <td class="pt-4">{{$appointment->employee->last_name}} {{$appointment->employee->name}}</td>
                         @else
-                            <td class="text-danger"><em>Nessun Dato</em></td>
+                            <td class="text-danger pt-4"><em>Nessun Dato</em></td>
                         @endif
-                        <td>€{{number_format($appointment->tot_paid, 2)}}</td>
+                        <td class="pt-4">€{{number_format($appointment->tot_paid, 2)}}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{route('admin.appointments.show', $appointment->id)}}">Dettagli <i class="fas fa-info-circle"></i></a>
-                            @if (Auth::id() === 1 && $appointment->start_time->format('Y') != $year)
-                                <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
-                                </form>
-                            @endif
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav{{$loop->index}}" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                  <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav{{$loop->index}}">
+                                  <ul class="navbar-nav">
+                                    <li class="nav-item active mt-2 mr-1 mb-2">
+                                        <a class="btn btn-primary" href="{{route('admin.appointments.show', $appointment->id)}}">Dettagli <i class="fas fa-info-circle"></i></a>
+                                    </li>
+                                    @if (Auth::id() === 1 && $appointment->start_time->format('Y') != $year)
+                                    <li class="nav-item mt-2 mr-1 mb-2">
+                                        <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </li>
+                                    @endif
+                                  </ul>
+                                </div>
+                            </nav>
                         </td>
                     </tr>
                 @endforeach

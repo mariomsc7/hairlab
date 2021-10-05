@@ -9,29 +9,29 @@
             rimosso.
         </div>
         @endif
+        <h1 class="mb-5 mt-5 font-weight-bold"><i class="fas fa-info-circle"></i> Dettagli appuntamento</h1>
         @if ($appointment->done === 0)
-            <a class="btn btn-primary text-uppercase" href="{{route('admin.appointments.index')}}">Ritorna in appuntamenti</a>
-            <a class="btn btn-warning text-uppercase" href="{{route('admin.appointments.edit', $appointment->id)}}">Modifica appuntamento</a>
+            <a class="bn1 mr-1 text-uppercase" href="{{ route('admin.appointments.index') }}">Appuntamenti <i class="fas fa-address-book"></i></a>
+            <a class="bn1 text-uppercase" href="{{route('admin.appointments.edit', $appointment->id)}}">Modifica appuntamento <i class="ml-1 fas fa-edit"></i></a>
         @else
-            <a class="btn btn-primary text-uppercase" href="{{route('admin.appointments.done.index')}}">Ritorna a storico</a>
+            <a class="bn1 text-uppercase" href="{{route('admin.appointments.done.index')}}">Ritorna a storico</a>
         @endif
 
         @if ($appointment->client)
-            <a class="btn btn-success text-uppercase" href="{{route('admin.clients.show', $appointment->client->id)}}">Dettaglio cliente</a>
+            <a class="bn1 text-uppercase" href="{{route('admin.clients.show', $appointment->client->id)}}">Dettaglio cliente <i class="fas fa-user"></i></a>
         @endif
 
         @if (Auth::id() === 1 && $appointment->employee)
-            <a class="btn btn-primary text-uppercase" href="{{route('admin.employees.show', $appointment->employee->id)}}">Produzione dipendente</a>
+            <a class="bn1 text-uppercase" href="{{route('admin.employees.show', $appointment->employee->id)}}">Produzione dipendente</a>
         @endif
         @if (Auth::id() === 1 || $appointment->done === 0)
         <form class="delete-form d-inline-block" action="{{route('admin.appointments.destroy', $appointment->id)}}" method="POST">
             @csrf
             @method('DELETE')
-            <input type="submit" class="btn btn-danger text-uppercase" value="Elimina">
+            <button type="submit" class="bn1">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
         </form>
         @endif
-        <h1 class="mb-5 mt-5">Dettagli appuntamento:</h1>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-4">
                 <h3>Nome cliente:</h3>
                 @if ($appointment->client)

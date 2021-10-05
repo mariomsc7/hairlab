@@ -29,16 +29,29 @@
                 <tbody>
                     @foreach ($services as $service)
                         <tr>
-                            <td>{{$service->name}}</td>
-                            <td>€{{number_format($service->price, 2)}}</td>
+                            <td class="pt-4">{{$service->name}}</td>
+                            <td class="pt-4">€{{number_format($service->price, 2)}}</td>
                             @if (Auth::id() === 1)
                                 <td>
-                                    <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
-                                    <form class="delete-form d-inline-block" action="{{route('admin.services.destroy', $service->id)}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
-                                    </form>
+                                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav{{$loop->index}}" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                          <span class="navbar-toggler-icon"></span>
+                                        </button>
+                                        <div class="collapse navbar-collapse" id="navbarNav{{$loop->index}}">
+                                          <ul class="navbar-nav">
+                                            <li class="nav-item active mt-2 mr-1 mb-2">
+                                                <a class="btn btn-warning" href="{{route('admin.services.edit', $service->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
+                                            </li>
+                                            <li class="nav-item mt-2 mr-1 mb-2">
+                                                <form class="delete-form d-inline-block" action="{{route('admin.services.destroy', $service->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
+                                                </form>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                    </nav>
                                 </td>
                             @endif
                         </tr>

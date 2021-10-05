@@ -29,18 +29,33 @@
                 <tbody>
                     @foreach ($employees as $employee)
                         <tr>
-                            <td>{{$employee->last_name}}</td>
-                            <td>{{$employee->name}}</td>
-                            <td>{{$employee->phone_number}}</td>
-                            <td>€{{number_format($employee->production, 2)}}</td>
+                            <td class="pt-4">{{$employee->last_name}}</td>
+                            <td class="pt-4">{{$employee->name}}</td>
+                            <td class="pt-4">{{$employee->phone_number}}</td>
+                            <td class="pt-4">€{{number_format($employee->production, 2)}}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{route('admin.employees.show', $employee->id)}}">Dettagli <i class="fas fa-info-circle"></i></a>
-                                <a class="btn btn-warning" href="{{route('admin.employees.edit', $employee->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
-                                <form class="delete-form d-inline-block" action="{{route('admin.employees.destroy', $employee->id)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
-                                </form>
+                                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav{{$loop->index}}" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                      <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarNav{{$loop->index}}">
+                                      <ul class="navbar-nav">
+                                        <li class="nav-item active mt-2 mr-1 mb-2">
+                                            <a class="btn btn-primary" href="{{route('admin.employees.show', $employee->id)}}">Dettagli <i class="fas fa-info-circle"></i></a>
+                                        </li>
+                                        <li class="nav-item mt-2 mr-1 mb-2">
+                                            <a class="btn btn-warning" href="{{route('admin.employees.edit', $employee->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
+                                        </li>
+                                        <li class="nav-item mt-2 mr-1 mb-2">
+                                            <form class="delete-form d-inline-block" action="{{route('admin.employees.destroy', $employee->id)}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
+                                            </form>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                </nav>
                             </td>
                         </tr>
                     @endforeach

@@ -4,8 +4,8 @@
 
     <div class="container">
             
-            <h1>Modifica info cliente: {{$client->name}}</h1>
-            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.clients.index')}}">Torna a clienti</a>
+            <h1>Modifica info cliente: <span class="text-primary">{{$client->name}} {{$client->last_name}}</span></h1>
+            <a class="bn1 text-uppercase mb-3" href="{{route('admin.clients.index')}}">Clienti <i class="fas fa-users"></i></a>
             <form method="POST" action="{{route('admin.clients.update', $client->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -37,7 +37,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-success text-uppercase">Salva</button>
+                <button type="submit" class="bn1 text-uppercase">Salva</button>
             </form>
 
     </div>

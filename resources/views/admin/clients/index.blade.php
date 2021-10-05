@@ -43,22 +43,38 @@
                     <tbody>
                         @foreach ($clients as $client)
                             <tr>
-                                <td>{{$client->last_name}}</td>
-                                <td>{{$client->name}}</td>
-                                <td>{{$client->phone_number}}</td>
-                                <td>{{$client->email}}</td>
+                                <td class="pt-4">{{$client->last_name}}</td>
+                                <td class="pt-4">{{$client->name}}</td>
+                                <td class="pt-4">{{$client->phone_number}}</td>
+                                <td class="pt-4">{{$client->email}}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{route('admin.appointments.create', $client->id)}}">Evento <i class="ml-1 fas fa-calendar-plus"></i></a>
-                                    <a class="btn btn-success" href="{{route('admin.clients.show', $client->id)}}">Storico <i class="ml-1 fas fa-book"></i></a>
-                                    <a class="btn btn-warning" href="{{route('admin.clients.edit', $client->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
-                                    @if (Auth::id() === 1)
-    
-                                        <form class="delete-form d-inline-block" action="{{route('admin.clients.destroy', $client->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
-                                        </form>
-                                    @endif
+                                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav{{$loop->index}}" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                          <span class="navbar-toggler-icon"></span>
+                                        </button>
+                                        <div class="collapse navbar-collapse" id="navbarNav{{$loop->index}}">
+                                          <ul class="navbar-nav">
+                                            <li class="nav-item active mt-2 mr-1 mb-2">
+                                                <a class="btn btn-primary" href="{{route('admin.appointments.create', $client->id)}}">Evento <i class="ml-1 fas fa-calendar-plus"></i></a>
+                                            </li>
+                                            <li class="nav-item active mt-2 mr-1 mb-2">
+                                                <a class="btn btn-success" href="{{route('admin.clients.show', $client->id)}}">Storico <i class="ml-1 fas fa-book"></i></a>
+                                            </li>
+                                            <li class="nav-item active mt-2 mr-1 mb-2">
+                                                <a class="btn btn-warning" href="{{route('admin.clients.edit', $client->id)}}">Modifica <i class="ml-1 fas fa-edit"></i></a>
+                                            </li>
+                                            @if (Auth::id() === 1)
+                                            <li class="nav-item mt-2 mr-1 mb-2">
+                                                <form class="delete-form d-inline-block" action="{{route('admin.clients.destroy', $client->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Elimina <i class="ml-1 fas fa-trash-alt"></i></button>
+                                                </form>
+                                            </li>
+                                            @endif
+                                          </ul>
+                                        </div>
+                                    </nav>  
                                 </td>
                             </tr>
                         @endforeach

@@ -14,9 +14,11 @@ class AppointmentController extends Controller
         $events = [];
         foreach ($appointments as $appointment){
             $event = [];
-            $event['title'] = $appointment->client->last_name . ' ' . $appointment->client->name . ' - Dipendente: ' . $appointment->employee->name;
             $event['start'] = $appointment->start_time;
             $event['end'] = $appointment->end_time;
+            $event['title'] = $appointment->client->name . ' ' . $appointment->client->last_name;
+            $event['split'] = $appointment->employee->id;
+            $event['content'] = $appointment->comment;
             $event['extendedProps'] =  ['status' => $appointment->done];
             $events[] = $event;
         }

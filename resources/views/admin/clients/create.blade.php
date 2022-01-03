@@ -5,7 +5,7 @@
     <div class="container">
             
             <h1>Aggiungi Cliente: </h1>
-            <a class="btn btn-primary text-uppercase mb-3" href="{{route('admin.clients.index')}}">Torna a clienti</a>
+            <a class="bn1 text-uppercase mb-3" href="{{route('admin.clients.index')}}">Torna a clienti</a>
             <form method="POST" action="{{route('admin.clients.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -37,7 +37,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-success text-uppercase">Salva</button>
+                <button type="submit" class="bn1 text-uppercase">Salva</button>
             </form>
         
     </div>

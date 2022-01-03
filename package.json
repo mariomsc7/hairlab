@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "fullcalendar": "^5.9.0"
+        "fullcalendar": "^5.9.0",
+        "vue-cal": "^3.10.1"
     }
 }

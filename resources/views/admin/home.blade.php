@@ -7,6 +7,7 @@
             <h1>Agenda <i class="fas fa-clipboard-list"></i></h1>
         </div>
     </div>
+    <agenda></agenda>
     <div class="mt-5" id='calendar'></div>
 </div>
 @endsection

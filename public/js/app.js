@@ -1912,6 +1912,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_cal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_cal__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_cal_dist_vuecal_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-cal/dist/vuecal.css */ "./node_modules/vue-cal/dist/vuecal.css");
 /* harmony import */ var vue_cal_dist_vuecal_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_cal_dist_vuecal_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_cal_dist_drag_and_drop_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-cal/dist/drag-and-drop.js */ "./node_modules/vue-cal/dist/drag-and-drop.js");
+/* harmony import */ var vue_cal_dist_drag_and_drop_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_cal_dist_drag_and_drop_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_cal_dist_i18n_it_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-cal/dist/i18n/it.js */ "./node_modules/vue-cal/dist/i18n/it.js");
+/* harmony import */ var vue_cal_dist_i18n_it_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_cal_dist_i18n_it_js__WEBPACK_IMPORTED_MODULE_3__);
 //
 //
 //
@@ -1928,6 +1932,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6452,7 +6463,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* You can easily set a different style for each split of your days. */\n.vuecal__cell-split.matteo {background-color: rgba(46, 236, 119, 0.5);}\n.vuecal__cell-split.davide {background-color: rgba(37, 174, 228, 0.5);}\n.vuecal__cell-split.martina {background-color: rgba(216, 139, 247, 0.5);}\n.vuecal__cell-split.luciana {background-color: rgba(197, 0, 82, 0.5);}\n.vuecal__cell-split .split-label {color: rgba(0, 0, 0, 0.1);font-size: 26px;}\n\n/* Different color for different event types. */\n.vuecal__event.leisure {background-color: rgba(253, 156, 66, 0.9);border: 1px solid rgb(233, 136, 46);color: #fff;}\n.vuecal__event.health {background-color: rgba(255, 255, 255, 0.9);border: 1px solid rgb(144, 210, 190);}\n.vuecal__event.sport {background-color: rgba(255, 102, 102, 0.9);border: 1px solid rgb(235, 82, 82);color: #fff;}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* You can easily set a different style for each split of your days. */\n.vuecal__cell-split.matteo {background-color: rgba(17, 204, 236, 0.5);}\n.vuecal__cell-split.davide {background-color: rgba(37, 174, 228, 0.5);}\n.vuecal__cell-split.martina {background-color: rgba(216, 139, 247, 0.5);}\n.vuecal__cell-split.luciana {background-color: rgba(197, 0, 82, 0.5);}\n.vuecal__cell-split .split-label {color: rgba(0, 0, 0, 0.1);font-size: 26px;}\n\n/* Different color for different event types. */\n.vuecal__event.leisure {background-color: rgba(253, 156, 66, 0.9);border: 1px solid rgb(233, 136, 46);color: #fff;}\n.vuecal__event.health {background-color: rgba(255, 255, 255, 0.9);border: 1px solid rgb(144, 210, 190);}\n.vuecal__event.sport {background-color: rgba(255, 102, 102, 0.9);border: 1px solid rgb(235, 82, 82);color: #fff;}\n", ""]);
 
 // exports
 
@@ -38289,6 +38300,28 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-cal/dist/drag-and-drop.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vue-cal/dist/drag-and-drop.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(("undefined"!==typeof self?self:this)["webpackJsonpvuecal"]=("undefined"!==typeof self?self:this)["webpackJsonpvuecal"]||[]).push([[39],{a691f:function(e,t,a){"use strict";a.r(t),a.d(t,"DragAndDrop",(function(){return m}));var n=a("5530");a("a4d3"),a("b64b");function i(e,t){if(null==e)return{};var a,n,i={},l=Object.keys(e);for(n=0;n<l.length;n++)a=l[n],t.indexOf(a)>=0||(i[a]=e[a]);return i}function l(e,t){if(null==e)return{};var a,n,l=i(e,t);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);for(n=0;n<r.length;n++)a=r[n],t.indexOf(a)>=0||Object.prototype.propertyIsEnumerable.call(e,a)&&(l[a]=e[a])}return l}var r=a("d4ec"),u=a("bee2"),c=a("ade3"),s=(a("caad"),a("2532"),a("7db0"),a("1276"),a("ac1f"),a("4de4"),800),v=null,o=null,d={id:null,date:null},h=!1,g=!0,f={el:null,cell:null,timeout:null},_={_eid:null,fromVueCal:null,toVueCal:null},m=function(){function e(t){Object(r["a"])(this,e),Object(c["a"])(this,"_vuecal",void 0),this._vuecal=t}return Object(u["a"])(e,[{key:"_getEventStart",value:function(e){var t=this._vuecal,a=t.timeStep,n=t.timeCellHeight,i=t.timeFrom,l=t.utils,r=l.cell.getPosition(e),u=r.y;return u-=1*e.dataTransfer.getData("cursor-grab-at"),Math.round(u*a/parseInt(n)+i)}},{key:"_updateEventStartEnd",value:function(e,t,a,n){var i=1*a.duration||t.endTimeMinutes-t.startTimeMinutes,l=Math.max(this._getEventStart(e),0);if(this._vuecal.snapToTime){var r=l+this._vuecal.snapToTime/2;l=r-r%this._vuecal.snapToTime}t.startTimeMinutes=l,t.start=new Date(new Date(n).setMinutes(l)),t.endTimeMinutes=Math.min(l+i,1440),t.end=new Date(new Date(n).setMinutes(t.endTimeMinutes))}},{key:"eventDragStart",value:function(e,t){if(3===e.target.nodeType)return e.preventDefault();e.dataTransfer.dropEffect="move",e.dataTransfer.setData("event",JSON.stringify(t)),e.dataTransfer.setData("cursor-grab-at",e.offsetY);var a=this._vuecal.domEvents.clickHoldAnEvent;setTimeout((function(){a._eid=null,clearTimeout(a.timeoutId),t.deleting=!1}),0),this._vuecal.domEvents.dragAnEvent._eid=t._eid,_._eid=t._eid,_.fromVueCal=this._vuecal._uid,t.dragging=!0,setTimeout((function(){return t.draggingStatic=!0}),0),h=!1,d={id:this._vuecal.view.id,date:this._vuecal.view.startDate},g=!0}},{key:"eventDragEnd",value:function(e){this._vuecal.domEvents.dragAnEvent._eid=null,_._eid=null,e.dragging=!1,e.draggingStatic=!1;var t=_.fromVueCal,a=_.toVueCal;a&&t!==a&&this._vuecal.utils.event.deleteAnEvent(e),_.fromVueCal=null,_.toVueCal=null,h&&g&&d.id&&this._vuecal.switchView(d.id,d.date,!0)}},{key:"cellDragEnter",value:function(e,t,a){var n=this,i=e.currentTarget;if(!e.currentTarget.contains(e.relatedTarget)){if(i===f.el||!i.className.includes("vuecal__cell-content"))return!1;f.el&&(f.cell.highlighted=!1),f={el:i,cell:t,timeout:clearTimeout(f.timeout)},t.highlighted=!0,["years","year","month"].includes(this._vuecal.view.id)&&(f.timeout=setTimeout((function(){return n._vuecal.switchToNarrowerView(a)}),2e3))}}},{key:"cellDragOver",value:function(e,t,a,n){e.preventDefault(),t.highlighted=!0,(n||0===n)&&(t.highlightedSplit=n)}},{key:"cellDragLeave",value:function(e,t){e.preventDefault(),e.currentTarget.contains(e.relatedTarget)||(t.highlightedSplit=!1,f.cell===t&&(clearTimeout(f.timeout),f={el:null,cell:null,timeout:null},t.highlighted=!1))}},{key:"cellDragDrop",value:function(e,t,a,i){var r=this;e.preventDefault(),clearTimeout(f.timeout),f={el:null,cell:null,timeout:null};var u,c,s=JSON.parse(e.dataTransfer.getData("event")||"{}");if(_.fromVueCal!==this._vuecal._uid){s._eid,s.start,s.end;var v=s.duration,o=l(s,["_eid","start","end","duration"]);u=this._vuecal.utils.event.createAnEvent(a,v,Object(n["a"])(Object(n["a"])({},o),{},{split:i}))}else if(u=this._vuecal.view.events.find((function(e){return e._eid===_._eid})),u||(u=this._vuecal.mutableEvents.find((function(e){return e._eid===_._eid})),c=!!u),!u){var d=s.endTimeMinutes-s.startTimeMinutes,h=(s.start,s.end,l(s,["start","end"]));u=this._vuecal.utils.event.createAnEvent(a,d,Object(n["a"])(Object(n["a"])({},h),{},{split:i}))}var m=u,p=m.start,T=m.split;this._updateEventStartEnd(e,u,s,a),c&&this._vuecal.addEventsToView([u]),u.dragging=!1,(i||0===i)&&(u.split=i),t.highlighted=!1,t.highlightedSplit=null,g=!1,_.toVueCal=this._vuecal._uid;var w=Object(n["a"])(Object(n["a"])({event:this._vuecal.cleanupEvent(u),oldDate:p,newDate:u.start},(i||0===i)&&{oldSplit:T,newSplit:i}),{},{originalEvent:this._vuecal.cleanupEvent(s),external:!_.fromVueCal});this._vuecal.$emit("event-drop",w),this._vuecal.$emit("event-change",{event:w.event,originalEvent:w.originalEvent}),setTimeout((function(){_._eid&&r.eventDragEnd(u)}),300)}},{key:"viewSelectorDragEnter",value:function(e,t,a){var n=this;e.currentTarget.contains(e.relatedTarget)||(a.highlightedControl=t,clearTimeout(v),v=setTimeout((function(){if(["previous","next"].includes(t))n._vuecal[t](),clearInterval(o),o=setInterval(n._vuecal[t],s);else if("today"===t){var e;clearInterval(o),n._vuecal.view.id.includes("year")&&(e=n._vuecal.enabledViews.filter((function(e){return!e.includes("year")}))[0]),n._vuecal.switchView(e||n._vuecal.view.id,new Date((new Date).setHours(0,0,0,0)),!0)}else n._vuecal.switchView(t,null,!0);h=!0}),s))}},{key:"viewSelectorDragLeave",value:function(e,t,a){e.currentTarget.contains(e.relatedTarget)||a.highlightedControl===t&&(a.highlightedControl=null,v&&(v=clearTimeout(v)),o&&(o=clearInterval(o)))}}]),e}()}}]);
+
+/***/ }),
+
+/***/ "./node_modules/vue-cal/dist/i18n/it.js":
+/*!**********************************************!*\
+  !*** ./node_modules/vue-cal/dist/i18n/it.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(("undefined"!==typeof self?self:this)["webpackJsonpvuecal"]=("undefined"!==typeof self?self:this)["webpackJsonpvuecal"]||[]).push([[17],{1412:function(e){e.exports=JSON.parse('{"weekDays":["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato","Domenica"],"months":["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],"years":"Anni","year":"Anno","month":"Mese","week":"Settimana","day":"Giorno","today":"Oggi","noEvent":"Nessun evento","allDay":"Tutto il giorno","deleteEvent":"Cancella","createEvent":"Crea evento","dateFormat":"dddd D MMMM YYYY"}')}}]);
+
+/***/ }),
+
 /***/ "./node_modules/vue-cal/dist/vuecal.common.js":
 /*!****************************************************!*\
   !*** ./node_modules/vue-cal/dist/vuecal.common.js ***!
@@ -48825,11 +48858,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("vue-cal", {
     attrs: {
-      "selected-date": "2021-12-30",
+      "selected-date": new Date(),
       "time-from": 8 * 60,
       "time-step": 30,
       "disable-views": ["years", "year"],
+      "active-view": "day",
       "editable-events": "",
+      locale: "it",
       events: _vm.events,
       "split-days": _vm.splitDays,
       "sticky-split-labels": _vm.stickySplitLabels,
@@ -61179,7 +61214,7 @@ document.addEventListener('DOMContentLoaded', function () {
     eventDidMount: function eventDidMount(info) {
       if (info.event.extendedProps.status === 1) {
         // Change background color of row
-        info.el.style.backgroundColor = 'lightgrey'; // Change color of dot marker
+        info.el.style.backgroundColor = 'lightgreen'; // Change color of dot marker
 
         var dotEl = info.el.getElementsByClassName('fc-event-dot')[0];
 

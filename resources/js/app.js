@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (info.event.extendedProps.status === 1) {
     
           // Change background color of row
-          info.el.style.backgroundColor = 'lightgrey';
+          info.el.style.backgroundColor = 'lightgreen';
     
           // Change color of dot marker
           var dotEl = info.el.getElementsByClassName('fc-event-dot')[0];
